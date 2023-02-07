@@ -1,6 +1,6 @@
 .banner {
     /* background-image: url("../../images/cover.jfif"); */
-    background-color: rgba(0, 34, 255, 0.44);
+    /* background-color: #00b2ff; */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -64,8 +64,9 @@
   
   .container {
     display: flex;
-    margin: 2vmax auto;
+    margin: 4vmax auto;
     width: 80vw;
+    /* background-color: rgba(233, 172, 102, 0.745); */
     flex-wrap: wrap;
     justify-content: center;
     max-width: 100%;

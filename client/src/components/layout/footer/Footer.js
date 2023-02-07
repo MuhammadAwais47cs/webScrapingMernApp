@@ -1,11 +1,12 @@
 import React from "react";
 // import playStore from "../../../images/playstore.png";
+import logo from '../assets/logo.png'
 // import appStore from "../../../images/Appstore.png";
 import "./Footer.css";
 
 const Footer = () => {
   return (
-    <footer id="footer">
+    <footer id="footer" className="bg-danger">
       <div className="leftFooter">
         <h4>DOWNLOAD OUR APP</h4>
         <p>Download App for Android and IOS mobile phone</p>
@@ -14,7 +15,10 @@ const Footer = () => {
       </div>
 
       <div className="midFooter">
-        <h1>ECOMMERCE.</h1>
+      <h1><a className="" href='/' ><img src={logo} alt="" width='300px'/></a></h1>
+        <a href="/ContactUs">Contact Us</a>
+        <a href="/AboutUs">About Us</a>
+        <a href="/Privacy">Privacy </a>
         <p>High Quality is our first priority</p>
 
         <p>Copyrights 2021 &copy; Muhammad Yahya</p>
