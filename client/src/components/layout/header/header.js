@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../assets/logo.png'
 import { FaSearch, FaPowerOff } from "react-icons/fa";
+import  Search  from '../search/Search';
 function Header() {
-    
+    const [openModel, setOpenModel] = useState(false) 
       const catogary = [  
         {
           name: "Mobiles",
@@ -308,22 +309,24 @@ function Header() {
           ],
         },
       ]
-     
+     const searchToggle = ()=> {
+      setOpenModel(!openModel)
+     }
     return (
         <>
        
         <nav className="navbar navbar-expand-sm bg-danger text-white  fixed-top">
         <div className="container-fluid ">
-        <button class="navbar-toggler" type="button"
+        <button className="navbar-toggler" type="button"
          data-bs-toggle="collapse" 
          data-bs-target="#navbarTogglerDemo01"
           aria-controls="navbarTogglerDemo01"
            aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon"></span>
       </button>
           
          
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
               <ul className="navbar-nav mx-auto justify-content-center flex-grow-1 pe-3">
                
                 
@@ -365,15 +368,20 @@ function Header() {
               placeholder="Search . . ."
               aria-label="Search"
             />
-              </form>*/}
-            <button className="btn text-white  " type="submit">
-             <FaSearch/>
+              </form>
+              onClick={()=>searchToggle()}
+            */}
+            <button type="button" className="btn text-white "   data-bs-toggle="modal" data-bs-target="#exampleModal"  >
+            <a href="/search">
+            <FaSearch/>
+            </a> 
             </button>
             <button className="btn  text-white" type="submit">
             <FaPowerOff/>
           </button>
         
       </nav>
+      {openModel && <Search/>}
         </>
     )
 }

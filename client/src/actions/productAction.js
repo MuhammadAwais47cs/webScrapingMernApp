@@ -5,10 +5,10 @@ import {
      CLEAR_ERROR 
     } from "../constant/productConstant";
 
-export const getProduct = () => async (dispatch) => {
+export const getProduct = (keyword='') => async (dispatch) => {
     try {
         dispatch({type: ALL_PRODUCT_REQUEST});
-        const {data} = await axios.get('http://localhost:4000/api/v1/products')
+        const {data} = await axios.get(`http://localhost:4000/api/v1/products?keyword=${keyword}`);
         dispatch({
             type:ALL_PRODUCT_SUCCESS,
             payload: data
@@ -22,8 +22,9 @@ export const getProduct = () => async (dispatch) => {
 }
 export const getProductDetails = (id) => async (dispatch) => {
     try {
+        console.log('id :>> ', id);
         dispatch({type: PRODUCT_DETAILS_REQUEST});
-        const {data} = await axios.get(`http://localhost:4000/api/v1/products/${id}`)
+        const {data} = await axios.get(`http://localhost:4000/api/v1/product/${id}`)
         dispatch({
             type:PRODUCT_DETAILS_SUCCESS,
             payload: data.product,

@@ -6,17 +6,28 @@ import delivery from '../assets/feature-delivery.svg';
 import shipping from '../assets/feature-shipping.svg';
 import warranty from '../assets/feature-warranty.svg';
 // import appStore from "../../../images/Appstore.png";
-const svg = [warranty, approved, delivery, shipping,]
+const svg = [
+  { img : approved, heading:'PTA Approved', para :'Mobile Phone'},
+  { img : warranty, heading:'1 Year', para :'Brand Warranty'},
+  { img : delivery, heading:'24hr Delivery', para :'Lahore & Islamabad'},
+  { img : shipping, heading:'Free Delivery', para :'All Over Pakistan'},
+ ]
 const Footer = () => {
   return (
-    <footer id="footer" className="bg-light">
+    <div id="" className="bg-light py-2">
       <div className="d-flex flex-row justify-content-evenly">
-        {svg.map((svg, i) => (
-          <img src={svg} key={i} alt="" className="px-auto" />
+        {svg.map(({img ,heading , para }, i) => (
+          <div className="col-md-3 d-flex flex-column align-items-center justify-content-center my-2">
+           <img src={img} key={i} alt="" className="" />
+         
+          <h3>{heading}</h3>
+           <p>{para}</p>
+      
+           </div>
         ))}
       </div>
 
-    </footer>
+    </div>
   );
 };
 

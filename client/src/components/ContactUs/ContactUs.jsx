@@ -35,32 +35,32 @@ function ContactUs() {
         </div>
         </div>
         <div className="col-md-8">
-        <form class="row g-3 pt-5 ">
+        <form className="row g-3 pt-5 ">
         <h2 className='py-5' >Contact Form</h2>
-        <div class="col-md-6">
-         <label for="inputEmail4" class="form-label">First name</label>
+        <div className="col-md-6">
+         <label for="inputEmail4" className="form-label">First name</label>
 
-        <input type="text" class="form-control" placeholder="" aria-label="First name"/>
+        <input type="text" className="form-control" placeholder="" aria-label="First name"/>
       </div>
-      <div class="col-md-6">
-        <label for="inputEmail4" class="form-label">Last name</label>
+      <div className="col-md-6">
+        <label for="inputEmail4" className="form-label">Last name</label>
 
-        <input type="text" class="form-control" placeholder="" aria-label="Last name"/>
+        <input type="text" className="form-control" placeholder="" aria-label="Last name"/>
       </div>
-    <div class="col-md-6">
-    <label for="inputEmail4" class="form-label">Email</label>
-    <input type="email" class="form-control" id="inputEmail4"/>
+    <div className="col-md-6">
+    <label for="inputEmail4" className="form-label">Email</label>
+    <input type="email" className="form-control" id="inputEmail4"/>
   </div>
-  <div class="col-md-6">
-    <label for="inputPassword4" class="form-label">Password</label>
-    <input type="password" class="form-control" id="inputPassword4"/>
+  <div className="col-md-6">
+    <label for="inputPassword4" className="form-label">Password</label>
+    <input type="password" className="form-control" id="inputPassword4"/>
   </div>
-  <div class="col-md-12">
-  <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  <div className="col-md-12">
+  <label for="exampleFormControlTextarea1" className="form-label">Message</label>
+  <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-outline-danger rounded-pill">Get In Touch</button>
+  <div className="col-12">
+    <button type="submit" className="btn btn-outline-danger rounded-pill">Get In Touch</button>
   </div>
 </form>
         </div>
