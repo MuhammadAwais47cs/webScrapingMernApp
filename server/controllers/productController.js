@@ -13,10 +13,10 @@ exports.createProduct = tryCatchAsyncError(async (req, res, next) => {
   //     message: 'A product with the same name already exists',
   //   });
   // }
-  const existingProduct = await Product.findOne({ name });
-  if (existingProduct) {
-    const deletedProduct = await Product.findByIdAndDelete(existingProduct._id);
-    console.log('Deleted product:', deletedProduct);
+  const existingProducts = await Product.find({ name });
+  if (existingProducts.length > 0) {
+    const deletedProducts = await Product.deleteMany({ name });
+    console.log('Deleted products:', deletedProducts);
   }
 
   const product = await Product.create(req.body?.product);

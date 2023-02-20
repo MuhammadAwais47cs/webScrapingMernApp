@@ -5,7 +5,7 @@ const axios = require('axios');
 
 const app = express();
 const arryOfUrl = [
-    'Mobiles',
+    // 'Mobiles/apple',
     // 'led-tv',
     // 'ac',
     // 'Smart-Watches',
@@ -68,7 +68,7 @@ const getProductsData = async (productsLinks) => {
              const ramRom = $('.ga-dataset.active').find('span').text();
              const Availability = $('.summary-price.text-black.bold.stock-status').text()?.trim();
              const price = $('.summary-price.text-black.price-size-lg').text().split('Rs.')[1]?.trim();
-             const category = 'Mobiles'
+             const category = 'Tablets'
             //  const url = $('#product-summary').find('a').attr('href')
             //  console.log('price:>>' , price);
             //  console.log('brand:>>' , brand);
