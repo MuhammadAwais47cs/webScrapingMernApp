@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import logo from '../assets/logo.png'
 import { FaSearch, FaPowerOff } from "react-icons/fa";
+import {useNavigate} from 'react-router-dom';
 import  Search  from '../search/Search';
 function Header() {
-    const [openModel, setOpenModel] = useState(false) 
+  const navigate = useNavigate();
+  const [openModel, setOpenModel] = useState(false) 
+   
+    const [cat, setCat] = useState(false) 
       const catogary = [  
         {
           name: "Mobiles",
@@ -312,6 +316,11 @@ function Header() {
      const searchToggle = ()=> {
       setOpenModel(!openModel)
      }
+     useEffect(()=>{
+      
+      if (cat)   navigate(`/products/${cat}`);
+     
+    } , [ cat ]);
     return (
         <>
        
@@ -345,7 +354,7 @@ function Header() {
               </a>
               <ul className="dropdown-menu">
               {children.map(({name})=>(
-                <li><a className="dropdown-item" key={name} href="/">{name}</a></li>
+                <li><p className="dropdown-item" onClick={()=>setCat(name)} key={name}  >{name}</p></li>
              ))}
 
                 

@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import {getProductDetails} from '../../actions/productAction';
 import MetaData from '../layout/MetaData';
 import Loader from "../layout/Loader/Loader";
-
+import './ProductDetails.css'
 function ProductDetails() {
    
   const { product, loading, error } = useSelector(
@@ -21,7 +21,6 @@ function ProductDetails() {
     }
 
    
-    alert(id)
     dispatch(getProductDetails(id));
   }, [dispatch, id, error, alert,]);
   return (
@@ -34,7 +33,7 @@ function ProductDetails() {
         <MetaData title={`${product.name} -- ECOMMERCE`} />
         <div className="ProductDetails">
           <div>
-            <div>
+            <div className='CarouselImage'>
             <img
             className="CarouselImage"
             src={product.imgUrl}
@@ -51,36 +50,47 @@ function ProductDetails() {
             </div>
             <div className="detailsBlock-2">
              
-              <span className="detailsBlock-2-span">
-                {" "}
-                ({product.numOfReviews} Reviews)
+              <span className="detailsBlock-2-span ">
+                {" "}<span className='h5'>
+                Brand :
+                </span>
+                {" "}<span className='h6 text-muted'>
+                {product.brand}
+                </span>
+              </span>
+            </div>
+            <div className="detailsBlock-2">
+             
+              <span className="detailsBlock-2-span ">
+                {" "}<span className='h5'>
+                Store :
+                </span>
+                {" "}<span className='h6 text-muted'>
+                {product?.store}
+                </span>
               </span>
             </div>
             <div className="detailsBlock-3">
               <h1>{`Rs:${product.price}`}</h1>
               <div className="detailsBlock-3-1">
-                <div className="detailsBlock-3-1-1">
                 
-               
-              </div>
-
+ 
               <p>
                 Status:
                 <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
-                  {product.Stock < 1 ? "OutOfStock" : "InStock"}
+                  {product.Stock < 1 ? " OutOfStock" : " InStock"}
                 </b>
               </p>
             </div>
 
             <div className="detailsBlock-4">
-              Description : <p>{product.description}</p>
+              Description : <span className='h6'>{product.description}</span>
             </div>
 
         
           </div>
         </div>
 
-        <h3 className="reviewsHeading">REVIEWS</h3>
 
          
 </div>

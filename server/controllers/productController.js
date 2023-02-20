@@ -2,11 +2,24 @@ const tryCatchAsyncError = require('../middleware/tryCatchAsyncError');
 const Product = require('../models/productModel');
 const ApiFeatures = require('../utils/apiFeature');
 const ErrorHandler = require('../utils/ErrorHandler');
-// Create product
-exports.createProduct = tryCatchAsyncError( async (req , res , next)=> {
-  console.log('req.body :>> ', req.body.product);
- 
-  const product = await Product.create(req.body?.product)
+// // Create product
+exports.createProduct = tryCatchAsyncError(async (req, res, next) => {
+  const { name } = req.body.product;
+
+  // const existingProduct = await Product.findOne({ name });
+  // if (existingProduct) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: 'A product with the same name already exists',
+  //   });
+  // }
+  const existingProduct = await Product.findOne({ name });
+  if (existingProduct) {
+    const deletedProduct = await Product.findByIdAndDelete(existingProduct._id);
+    console.log('Deleted product:', deletedProduct);
+  }
+
+  const product = await Product.create(req.body?.product);
   console.log('res :>> ', product?.id);
   return res.status(201).json({
     success:true,
@@ -30,14 +43,14 @@ exports.getProductDetails = tryCatchAsyncError( async (req, res , next ) => {
 })
 exports.getAllProducts = tryCatchAsyncError( async (req , res , next)=> {
   // return next(new ErrorHandler('template error'))
-  const resultPerPage = 20;
+  const resultPerPage = 10;
   const productsCount = await Product.countDocuments();
 
-  console.log('req.body :>> ', req.body);
+  console.log('productsCount :>> ', productsCount);
   const apiFeatures = new ApiFeatures(Product.find() , req.query).search().filter().pagination(resultPerPage);
   const products = await apiFeatures.query
   if(!products) {
    return next(new ErrorHandler(`Product not found`, 404));
   }
-  res.status(200).json({success: true , products , productsCount})
+  res.status(200).json({success: true , products , productsCount, resultPerPage})
 })

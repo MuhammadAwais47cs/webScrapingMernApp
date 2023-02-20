@@ -5,15 +5,23 @@ const axios = require('axios');
 
 const app = express();
 const arryOfUrl = [
-    // 'Mobiles/apple',
-    'led-tv',
+    'Mobiles',
+    // 'led-tv',
     // 'ac',
     // 'Smart-Watches',
     // 'Wireless-Earbuds',
     // 'Bluetooth-Speakers',
     // 'Power-Banks',
     // 'Laptops',
-    // 'Tablets'
+    // 'Tablets',
+    // 'Mobiles',
+// 'Tablets',
+// 'Smart Watches',
+// 'Wireless Earbuds',
+// 'Mobiles Accessories',
+// 'Laptops',
+// 'tv-home-appliances',
+// 'Motorcycle'
 ]
 const productsLinks = []
 const products = []
@@ -21,9 +29,9 @@ const postProduct = async (product) => {
   console.log('product.lenght() :>> ', product.length);
  
   await  product.map((product, index)=>{
-    console.log('product.name :>> ', product.name );
-    console.log('index :>> ', index );
-    
+    console.log('product :>> ', product.productUrl );
+    // console.log('index :>> ', index );
+    // return
      axios.post(
       "http://localhost:4000/api/v1/products/new",
       { product },
@@ -44,7 +52,7 @@ const postProduct = async (product) => {
     //   });
 
 const getProductsData = async (productsLinks) => {
-    productsLinks.map( async ({url,imgUrl,category})=>{
+    productsLinks.map( async ({url,imgUrl})=>{
         // console.log('productsLinks :>> ',url);
        
         await axios(url)
@@ -52,14 +60,15 @@ const getProductsData = async (productsLinks) => {
             const html = response.data
             const $ = cheerio.load(html)
             $('#product-main', html).each(function() {
-             const url = $(this).find('a').attr('href')
+             const productUrl = url
             //  const images = $('.product-image-main').find('amp-img').attr('src');
              const name = $('.product-title').find('h2').text();
-              
+              const store = 'PriceOye'
              const brand = $('.breadcrumb a').eq(1).text();
              const ramRom = $('.ga-dataset.active').find('span').text();
              const Availability = $('.summary-price.text-black.bold.stock-status').text()?.trim();
              const price = $('.summary-price.text-black.price-size-lg').text().split('Rs.')[1]?.trim();
+             const category = 'Mobiles'
             //  const url = $('#product-summary').find('a').attr('href')
             //  console.log('price:>>' , price);
             //  console.log('brand:>>' , brand);
@@ -67,14 +76,13 @@ const getProductsData = async (productsLinks) => {
             //  console.log('Availability :>> ', Availability);
             //  console.log('ramRom :>> ', ramRom);
             //  console.log('url :>> ', url);
-            //  console.log('images :>> ', images);
-              products.push({price,Availability,name ,description:name, brand ,url,imgUrl , category})
+             console.log('productUrl :>> ', productUrl);
+              products.push({price,Availability,name ,description:name, brand ,productUrl,imgUrl ,store, category})
               
               postProduct(products);
 
             })
-        // console.log('productsLinks in  :>> ', productsLinks);
-        //  await getProductsData(productsLinks)
+         
         }).catch(err => console.error(err));
         })
 }
@@ -89,9 +97,10 @@ await axios(`https://priceoye.pk/${category}`)
      const imgUrl = $(this).find('amp-img').attr('src')
     //  console.log('url :>> ', url ,imgUrl);
       productsLinks.push({url,imgUrl,category})
+      // console.log('productsLinks in  :>> ', productsLinks);
     })
-console.log('productsLinks in  :>> ', productsLinks.length);
-
+    
+    console.log('productsLinks in  :>> ', productsLinks.length);
  await getProductsData(productsLinks)
 }).catch(err => console.error(err));
 })
