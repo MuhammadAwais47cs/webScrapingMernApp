@@ -33,7 +33,7 @@ function Home () {
 
   const catgory = [
    {  name :'Mobiles',            category:'Mobiles',url:'https://static.priceoye.pk/images/home/mobiles.svg'},
-   {  name :'Smart-Watches',      category:'Smart-Watches',url:'https://static.priceoye.pk/images/home/smart-watches.svg' },
+   {  name :'Smart Watches',      category:'Smart-Watches',url:'https://static.priceoye.pk/images/home/smart-watches.svg' },
    {  name :'Wireless Earbuds',   category:'Wireless-Earbuds', url:'https://static.priceoye.pk/images/home/wireless-earbuds.svg'},
    {  name :'Bluetooth Speakers', category:'Bluetooth-Speakers',url:'https://static.priceoye.pk/images/home/bluetooth-speakers.svg'},
    {  name :'Power Banks',        category:'Power-Banks', url:'https://static.priceoye.pk/images/home/power-banks.svg'},

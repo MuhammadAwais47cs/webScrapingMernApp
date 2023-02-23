@@ -7,6 +7,7 @@ import Pagination from "react-js-pagination";
 import Product from '../Home/Product';
 import { useLocation } from "react-router-dom";
 import MetaData from '../layout/MetaData';
+import Loader from '../layout/Loader/Loader';
 function ProductDetails() {
    const params = useParams();
    const { keyword} = params
@@ -16,14 +17,16 @@ function ProductDetails() {
   const [brand, setBrand] = useState("");
   const [price, setPrice] = useState([1,500000]);
    const categories = [
-    'Mobiles',
-    'Tablets',
-    'Smart Watches',
-    'Wireless Earbuds',
-    'Mobiles Accessories',
-    'Laptops',
-    'TV & Home Appliances',
-    'Motorcycle'
+  { name: 'Mobiles', value: 'Mobiles'},
+  { name: 'Tablets', value: 'Tablets'},
+  { name: 'Smart Watches', value: 'Smart-Watches'},
+  { name: 'Wireless Earbuds', value: 'Wireless-Earbuds'},
+  { name: 'Mobiles Accessories', value: 'Mobiles-Accessories'},
+  { name: 'Laptops', value: 'Laptops'},
+  { name: 'TV & Home Appliances', value:'TV-&-Home-Appliances',},
+  { name: 'Motorcycle', value: 'Motorcycle'},
+    
+    
    ]
    const Brands = ["Apple","Samsung","Realme", "Infinix", "Oppo", "Xiaomi", "Vivo", "Tecno",  "Nokia"];
 
@@ -45,7 +48,11 @@ function ProductDetails() {
     dispatch(getProduct(keyword, currentPage, price, category ,brand));
    } , [dispatch,keyword,currentPage,price,category, error,brand]);
   return (
-    <>
+
+   <>
+    {loading ? (<Loader/>) : 
+    (
+      <>
     <div className=''>
     <MetaData title="PRODUCTS -- ECOMMERCE" />
     <h2 className="productsHeading">Products</h2>
@@ -65,13 +72,13 @@ function ProductDetails() {
         <p className='text-danger'>Categories</p>
         
             <ul className="categoryBox">
-              {categories.map((category) => (
+              {categories.map(({name,value}) => (
                 <li
                   className="category-link"
-                  key={category}
-                  onClick={() => setCategory(category)}
+                  key={name}
+                  onClick={() => setCategory(value)}
                 >
-                  {category}
+                  {name}
                   </li>
                   ))}
                   </ul>
@@ -118,6 +125,9 @@ function ProductDetails() {
     )}
     </div>
     </>
+  )}
+  </>
+
   )
 }
 

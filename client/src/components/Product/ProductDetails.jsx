@@ -95,8 +95,8 @@ function ProductDetails() {
         </div>
         </div>
         <div className='container-fluid my-3 mb-md-5'>
-        <div className=' row mx-0 px-0 mb-4'>
-         <div className='col-md-8 ms-4 bg-danger py-3 rounded-3 ps-3 text-white '>
+        <div className=' row mx-0 px-0 mb-4 bg-danger rounded-pill'>
+         <div className='col-md-11  ms-4  py-3  ps-3 text-white '>
          <h5 className='' > Compare {product.name } {' '}Prices</h5>
          </div>
        
