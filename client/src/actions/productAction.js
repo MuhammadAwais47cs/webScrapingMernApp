@@ -6,7 +6,7 @@ import {
     } from "../constant/productConstant";
 
 export const getProduct =
-(keyword = "", currentPage = 1, price = [0, 500000], category, ratings = 0) =>
+(keyword = "", currentPage = 1, price = [0, 500000], category, brand, ratings = 0) =>
  async (dispatch) => {
     try {
         dispatch({type: ALL_PRODUCT_REQUEST});
@@ -15,6 +15,9 @@ export const getProduct =
     console.log('category :>> ', category);
       if (category) {
         link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}&category=${category}`;
+      }
+      if (brand) {
+        link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}&brand=${brand}`;
       }
 
         const {data} = await axios.get(link);

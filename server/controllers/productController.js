@@ -6,18 +6,18 @@ const ErrorHandler = require('../utils/ErrorHandler');
 exports.createProduct = tryCatchAsyncError(async (req, res, next) => {
   const { name } = req.body.product;
 
-  // const existingProduct = await Product.findOne({ name });
-  // if (existingProduct) {
-  //   return res.status(400).json({
-  //     success: false,
-  //     message: 'A product with the same name already exists',
-  //   });
-  // }
-  const existingProducts = await Product.find({ name });
-  if (existingProducts.length > 0) {
-    const deletedProducts = await Product.deleteMany({ name });
-    console.log('Deleted products:', deletedProducts);
+  const existingProduct = await Product.findOne({ name });
+  if (existingProduct) {
+    return res.status(400).json({
+      success: false,
+      message: 'A product with the same name already exists',
+    });
   }
+  // const existingProducts = await Product.find({ name });
+  // if (existingProducts.length > 0) {
+  //   const deletedProducts = await Product.deleteMany({ name });
+  //   console.log('Deleted products:', deletedProducts);
+  // }
 
   const product = await Product.create(req.body?.product);
   console.log('res :>> ', product?.id);
@@ -43,7 +43,7 @@ exports.getProductDetails = tryCatchAsyncError( async (req, res , next ) => {
 })
 exports.getAllProducts = tryCatchAsyncError( async (req , res , next)=> {
   // return next(new ErrorHandler('template error'))
-  const resultPerPage = 10;
+  const resultPerPage = 20;
   const productsCount = await Product.countDocuments();
 
   console.log('productsCount :>> ', productsCount);

@@ -5,7 +5,7 @@ const axios = require('axios');
 
 const app = express();
 const arryOfUrl = [
-    // 'Mobiles/apple',
+    // 'Mobiles',
     // 'led-tv',
     // 'ac',
     // 'Smart-Watches',
@@ -13,7 +13,7 @@ const arryOfUrl = [
     // 'Bluetooth-Speakers',
     // 'Power-Banks',
     // 'Laptops',
-    // 'Tablets',
+    'Tablets',
     // 'Mobiles',
 // 'Tablets',
 // 'Smart Watches',

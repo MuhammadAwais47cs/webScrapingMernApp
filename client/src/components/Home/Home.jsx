@@ -11,6 +11,9 @@ import {useAlert} from 'react-alert';
 import Header from '../layout/header/header';
 import Footer from '../layout/footer/Footer';
 import Feature from '../layout/Feature/Feature.jsx';
+import  banner1  from './Asset/banner1.png'
+import  banner2   from './Asset/banner2.png'
+import  banner3   from './Asset/banner3.png'
 function Home () {
   // const alert = useAlert();
   const navigate = useNavigate();
@@ -29,14 +32,14 @@ function Home () {
   } , [dispatch,category,error]);
 
   const catgory = [
-   { category:' Mobiles',url:'https://static.priceoye.pk/images/home/mobiles.svg'},
-   { category:' Smart Watches',url:'https://static.priceoye.pk/images/home/smart-watches.svg' },
-   { category:' Wireless Earbuds', url:'https://static.priceoye.pk/images/home/wireless-earbuds.svg'},
-   {category: ' Bluetooth Speakers',url:'https://static.priceoye.pk/images/home/bluetooth-speakers.svg'},
-   {category: ' Power Banks', url:'https://static.priceoye.pk/images/home/power-banks.svg'},
-   {category: ' Laptops',url:'https://static.priceoye.pk/images/home/laptops.svg'},
-   {category:  'Tablets', url:'https://static.priceoye.pk/images/home/tablets.svg'},
-   {category:  'TV', url:'https://static.priceoye.pk/images/home/tablets.svg'}
+   {  name :'Mobiles',            category:'Mobiles',url:'https://static.priceoye.pk/images/home/mobiles.svg'},
+   {  name :'Smart-Watches',      category:'Smart-Watches',url:'https://static.priceoye.pk/images/home/smart-watches.svg' },
+   {  name :'Wireless Earbuds',   category:'Wireless-Earbuds', url:'https://static.priceoye.pk/images/home/wireless-earbuds.svg'},
+   {  name :'Bluetooth Speakers', category:'Bluetooth-Speakers',url:'https://static.priceoye.pk/images/home/bluetooth-speakers.svg'},
+   {  name :'Power Banks',        category:'Power-Banks', url:'https://static.priceoye.pk/images/home/power-banks.svg'},
+   {  name :'Laptops',            category:'Laptops',url:'https://static.priceoye.pk/images/home/laptops.svg'},
+   {  name :'Tablets',            category:'Tablets', url:'https://static.priceoye.pk/images/home/tablets.svg'},
+   {  name :'TV',                 category:'TV', url:'https://static.priceoye.pk/images/home/tablets.svg'}
   ]
   
 const product = [{
@@ -57,6 +60,8 @@ const product = [{
     
       <p>Welcome to Ecommerce</p>
       <h1>FIND AMAZING PRODUCTS BELOW</h1>
+          <img src='https://images.priceoye.pk/pakistan-priceoye-slider-hwg39.jpg' width="1600px"/>  
+          <img src='https://images.priceoye.pk/pakistan-priceoye-slider-hwg39.jpg' width="1600px"/>  
     */}
       <>
     
@@ -66,11 +71,15 @@ const product = [{
       <img src='https://images.priceoye.pk/pakistan-priceoye-slider-1sh6x.png' width="1600px"/>  
       </div>
         <div className="carousel-item ">
-          <img src='https://images.priceoye.pk/pakistan-priceoye-slider-hwg39.jpg' width="1600px"/>  
+        {/*  <img src='https://images.priceoye.pk/pakistan-priceoye-slider-hwg39.jpg' width="1600px"/>  */}
+          <img src={banner2} width="1600px" height="400px"/> 
         </div>
        
         <div className="carousel-item">
-        <img src='https://images.priceoye.pk/pakistan-priceoye-slider-hwg39.jpg' width="1600px"/>  
+          <img src={banner1} width="1600px" height="400px"/> 
+        </div>
+        <div className="carousel-item">
+          <img src={banner3} width="1600px" height="400px"/> 
         </div>
       </div>
       <button className="carousel-control-prev " type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -85,7 +94,7 @@ const product = [{
     <nav className="navbar navbar-expand-sm my-3 mt-5 pt-2">
     <div className="container-fluid">
         <div className="navbar-nav mx-auto">
-        {catgory.map(({category,url})=>(
+        {catgory.map(({name,category,url})=>(
          
           <>
           <li
@@ -96,7 +105,7 @@ const product = [{
         <div className='d-flex flex-column justify-content-center align-items-center mx-2'>
         <img src={url} width='75px' height='70px' alt=""/ >
        
-        {category}
+        {name}
         </div>
       </li>
        
