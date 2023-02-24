@@ -1,6 +1,8 @@
 import React from "react";
 // import playStore from "../../../images/playstore.png";
 import logo from '../assets/logo.png'
+import "../footer/Footer.css";
+
 import approved from '../assets/feature-approved.svg';
 import delivery from '../assets/feature-delivery.svg';
 import shipping from '../assets/feature-shipping.svg';
@@ -17,8 +19,8 @@ const Footer = () => {
     <div id="" className="bg-light py-2">
       <div className="d-flex flex-row justify-content-evenly">
         {svg.map(({img ,heading , para }, i) => (
-          <div className="col-md-3 d-flex flex-column align-items-center justify-content-center my-2">
-           <img src={img} key={i} alt="" className="" />
+          <div className="feature-box col-md-3 d-flex flex-column align-items-center justify-content-center my-2">
+           <img src={img} key={i} alt=""  className="" />
          
           <h3>{heading}</h3>
            <p>{para}</p>

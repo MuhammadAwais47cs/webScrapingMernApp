@@ -37,9 +37,9 @@ function Home () {
    {  name :'Wireless Earbuds',   category:'Wireless-Earbuds', url:'https://static.priceoye.pk/images/home/wireless-earbuds.svg'},
    {  name :'Bluetooth Speakers', category:'Bluetooth-Speakers',url:'https://static.priceoye.pk/images/home/bluetooth-speakers.svg'},
    {  name :'Power Banks',        category:'Power-Banks', url:'https://static.priceoye.pk/images/home/power-banks.svg'},
-   {  name :'Laptops',            category:'Laptops',url:'https://static.priceoye.pk/images/home/laptops.svg'},
-   {  name :'Tablets',            category:'Tablets', url:'https://static.priceoye.pk/images/home/tablets.svg'},
-   {  name :'TV',                 category:'TV', url:'https://static.priceoye.pk/images/home/tablets.svg'}
+   {  name :'Laptops',            category:'Laptops',url:'https://static.priceoye.pk/images/home/laptops.svg', height:'100px' },
+   {  name :'Tablets',            category:'Tablets', url:'https://static.priceoye.pk/images/home/tablets.svg' ,height:'100px' },
+  //  {  name :'TV',                 category:'TV', url:'https://static.priceoye.pk/images/home/tablets.svg'}
   ]
   
 const product = [{
@@ -56,30 +56,19 @@ const product = [{
       <Header/>
       <MetaData title={'Ecommerce'}/>
       <div className="banner">
-      {/*
-    
-      <p>Welcome to Ecommerce</p>
-      <h1>FIND AMAZING PRODUCTS BELOW</h1>
-          <img src='https://images.priceoye.pk/pakistan-priceoye-slider-hwg39.jpg' width="1600px"/>  
-          <img src='https://images.priceoye.pk/pakistan-priceoye-slider-hwg39.jpg' width="1600px"/>  
-    */}
-      <>
-    
-      <div id="carouselExample" className="carousel slide pointer-event">
+       <div id="carouselExample" className="carousel slide pointer-event">
       <div className="carousel-inner">
-      <div className="carousel-item active">
-      <img src='https://images.priceoye.pk/pakistan-priceoye-slider-1sh6x.png' width="1600px"/>  
-      </div>
-        <div className="carousel-item ">
+      
+        <div className="carousel-item active">
         {/*  <img src='https://images.priceoye.pk/pakistan-priceoye-slider-hwg39.jpg' width="1600px"/>  */}
-          <img src={banner2} width="1600px" height="400px"/> 
+        <img src={banner1} /> 
         </div>
-       
+        
         <div className="carousel-item">
-          <img src={banner1} width="1600px" height="400px"/> 
+        <img src={banner2}  /> 
         </div>
         <div className="carousel-item">
-          <img src={banner3} width="1600px" height="400px"/> 
+          <img src={banner3} /> 
         </div>
       </div>
       <button className="carousel-control-prev " type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -90,36 +79,33 @@ const product = [{
         <span className="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
         <span className="visually-hidden">Next</span>
       </button>
-    </div>
-    <nav className="navbar navbar-expand-sm my-3 mt-5 pt-2">
-    <div className="container-fluid">
-        <div className="navbar-nav mx-auto">
-        {catgory.map(({name,category,url})=>(
-         
-          <>
-          <li
-          className="category-link"
-          key={category}
-          onClick={() =>  setCategory(category)}
-        >
-        <div className='d-flex flex-column justify-content-center align-items-center mx-2'>
-        <img src={url} width='75px' height='70px' alt=""/ >
+       </div>
+      </div>
+      <div className="categoryBar d-flex flex-row justify-content-center my-3">
+      {catgory.map(({name,category,url,height})=>(
        
-        {name}
-        </div>
-      </li>
-       
-  
-        </>
-
-        ))}
-          
-        </div>
+        
+        <div
+        className="category-link d-flex flex-column  mx-2"
+        key={category}
+        onClick={() =>  setCategory(category)}
+      >
+     <div className='my-4 mx-auto'>
+      
+     <img  src={url} width='100vmax' height={height} alt=""/ >
+     </div>
+     
+     <div className='h5 text-center'>
+     {name}
+     </div>
+     
     </div>
-  </nav>
-      </>
-    
+     
 
+      
+
+      ))}
+        
       </div>
       <a href="#container">
       <h2 className="homeHeading ">Featured Products</h2> 

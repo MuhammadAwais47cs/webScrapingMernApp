@@ -1,32 +1,48 @@
 import React from "react";
 // import playStore from "../../../images/playstore.png";
-import logo from '../assets/logo.png'
+import logo from '../assets/2.png'
 // import appStore from "../../../images/Appstore.png";
-import { FaFacebook ,FaInstagram ,FaPinterestP ,FaTwitterSquare,FaFacebookMessenger, FaPhoneSquare,FaWhatsapp,FaLocationArrow } from "react-icons/fa";
+import { FaFacebook ,FaInstagram ,FaPinterestP ,FaTwitterSquare,FaFacebookMessenger,FaRegEnvelope, FaPhoneSquare,FaWhatsapp,FaLocationArrow } from "react-icons/fa";
 import "./Footer.css";
 
 const Footer = () => {
+  const socialLinks = [
+    'Instagram',
+    'Facebook',
+    'Whatsapp',
+    'PinterestP',
+  ]
+  const handleGmailClick = (email) => {
+    // Redirect to the Gmail login page
+    // window.location.href = 'https://mail.google.com/mail/u/0/#inbox?compose=new';
+     window.open(`https://mail.google.com/mail/u/0/#inbox?compose=new&to=${email}`, '_blank');
+  }
+  const handleWhatsAppClick = () => {
+    // Redirect to WhatsApp with a pre-populated message
+    window.open(`https://api.whatsapp.com/send?phone=${312-4709123}&text=${'message'}`) ;
+  }
+
   return (
     <>
     <footer id="footer" className="bg-danger   ">
     
   
       <div className="leftFooter">
-      <h1><a className="" href='/' ><img src={logo} alt="" width='300px'/></a></h1>
+      <img src={logo} alt="" />
       <p> Our mission as Shopping Mall is to provide consumers with the most accurate and up-to-date information on the prices  </p>
      <div className="d-flex flex-row ">
-     <div className="col-md-3 mx-1">
+     <a href="http://facebook.com" className="col-md-3 mx-1">
      <FaFacebook />
-     </div>
-     <div className="col-md-3 mx-1"> 
+     </a>
+     <a href="http://instagram.com" className="col-md-3 mx-1"> 
      <FaInstagram/>
-     </div>
-     <div className="col-md-3 mx-1">
+     </a>
+     <a href="http://pinterest.com" className="col-md-3 mx-1">
      <FaPinterestP/>
-      </div>
-     <div className="col-md-3 mx-1">
+      </a>
+     <a href="http://whatsapp.com" className="col-md-3 mx-1">
      <FaWhatsapp/>
-      </div>
+      </a>
      </div>
       {/*
       <p>Download App for Android and IOS mobile phone</p>
@@ -36,7 +52,7 @@ const Footer = () => {
       </div>
 
       <div className="midFooter mt-4">
-      <h4>Quick Links</h4>
+      <h1>Quick Links</h1>
   
         <a href="/ContactUs">Contact Us</a>
         <a href="/AboutUs">About Us</a>
@@ -47,9 +63,9 @@ const Footer = () => {
 
       <div className="rightFooter mt-4">
         <h4>Contact Us</h4>
-  <span className="h6 my-2 " href="http://instagram.com/meabhisingh"><FaPhoneSquare/> +92-312-4709123</span>
-        <span className="h6 my-2 " href="http://youtube.com/6packprogramemr"><FaFacebookMessenger/> shopingmallofficial@gmail.com</span>
-  <span className="h6 my-2" href="http://instagram.com/meabhisingh"><FaLocationArrow/> 23 Takbeer Block Bahria Town Lahore</span>
+  <a className="h6  " href="#" onClick={handleWhatsAppClick}><FaPhoneSquare/> +92-312-4709123</a>
+        <a className="h6   " href="#"  onClick={()=>handleGmailClick('shopingmallofficial@gmail.com')}><FaRegEnvelope/> shopingmallofficial@gmail.com</a>
+  <a className="h6  " href="#"  ><FaLocationArrow/> 23 Takbeer Block Bahria Town Lahore</a>
 
         {/*   <h4>Follow Us</h4>
         <a href="http://instagram.com/meabhisingh">Instagram</a>

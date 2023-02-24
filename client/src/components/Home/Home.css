@@ -12,7 +12,9 @@
     justify-content: center;
     color: white;
   }
-  
+  .carousel-item > img {
+    width: 100vmax;
+  }
   .banner > h1 {
     margin: 5vmax;
   
@@ -43,7 +45,7 @@
   .banner::after {
     content: "";
     width: 100vw;
-    height: 100vmin;
+    height: 76vmin;
     background-color: #ffffff;
     position: absolute;
     top: 0%;
@@ -51,7 +53,7 @@
     clip-path: polygon(100% 100%, 0 100%, 100% 100%);
     max-width: 100%;
   }
-  
+
   .homeHeading {
     text-align: center;
     font-family: Roboto;
@@ -121,10 +123,16 @@
   }
   
   @media screen and (max-width: 600px) {
+    .carousel-item > img {
+      width: 65vmax;
+    }
     .productCard > p {
       font-size: 1.7vmax;
     }
-  
+    .categoryBar {
+     overflow-y: auto;
+      
+    }
     .productCard > div {
       margin: 0vmax;
       display: block;

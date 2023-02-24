@@ -381,7 +381,7 @@ function Header() {
               onClick={()=>searchToggle()}
             */}
             <button type="button" className="btn text-white "   data-bs-toggle="modal" data-bs-target="#exampleModal"  >
-            <a href="/search">
+            <a href="/search" className='text-white'>
             <FaSearch/>
             </a> 
             </button>
