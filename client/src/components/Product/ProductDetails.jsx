@@ -1,26 +1,21 @@
 import React, { useEffect , useState } from 'react'
 import {useSelector , useDispatch} from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import {   useParams } from 'react-router-dom';
 import {getProductDetails} from '../../actions/productAction';
 import MetaData from '../layout/MetaData';
-import Loader from "../layout/Loader/Loader";import Footer from '../layout/footer/Footer';
-import Feature from '../layout/Feature/Feature.jsx';
+import Loader from "../layout/Loader/Loader";
 import './ProductDetails.css'
 function ProductDetails() {
    
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
-    const navigate = useNavigate()
    const dispatch = useDispatch();
    const { id } = useParams();
-   const [ storeLink , setStoreLink ] = useState('');
   useEffect(() => {
     if (error) {
       alert.error(error);
-      // dispatch(clearErrors());
     }
-    // if (storeLink)   navigate(storeLink);
 
    
     dispatch(getProductDetails(id));
@@ -69,10 +64,10 @@ function ProductDetails() {
              
               <span className="detailsBlock-2-span ">
                 {" "}<span className='h5'>
-                Store :
+                Description :
                 </span>
                 {" "}<span className='h6 text-muted'>
-                {product?.store}
+                {product?.description}
                 </span>
               </span>
             </div>
@@ -88,9 +83,7 @@ function ProductDetails() {
                 </b>
               </p>
             </div>
-            <div className="detailsBlock-4">
-              Description : <span className='h6'>{product.description}</span>
-            </div>
+           
           </div>
         </div>
         </div>
@@ -135,8 +128,7 @@ function ProductDetails() {
         
       </>
     )}
-    <Feature/>    
-<Footer/>
+    
   </>
    
   );

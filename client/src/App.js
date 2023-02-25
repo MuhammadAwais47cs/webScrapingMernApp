@@ -8,6 +8,7 @@ import {
 import './App.css';
 import Header from './components/layout/header/header.js';
 import Footer from './components/layout/footer/Footer.js';
+import Features from './components/layout/Feature/Feature';
 import Home from './components/Home/Home.jsx';
 import ContactUs from "./components/ContactUs/ContactUs";
 import AboutUs from "./components/AboutUs/AboutUs.jsx";
@@ -19,6 +20,7 @@ function App() {
   return (
     <>
       <Router>
+      <Header/>
       <Routes>
      
       <Route exact path="/" element={<Home/>} />
@@ -31,6 +33,8 @@ function App() {
       <Route exact path="/search" element={<Search/>} />
      
       </Routes>
+      <Features/>
+      <Footer/>
       </Router>
     </>
   );

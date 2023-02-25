@@ -4,9 +4,15 @@ const ApiFeatures = require('../utils/apiFeature');
 const ErrorHandler = require('../utils/ErrorHandler');
 // // Create product
 exports.createProduct = tryCatchAsyncError(async (req, res, next) => {
-  const { name } = req.body.product;
-
+  const { name,imgUrl } = req.body.product;
+if (imgUrl == 'https://static.priceoye.pk/images/badges/fever-cricket.png'){
+  return   res.status(400).json({
+    success: false,
+    message: 'A product with the same name already exists',
+  });
+} else {
   const existingProduct = await Product.findOne({ name });
+  console.log('existingProduct :>> ', existingProduct);
   if (existingProduct) {
     return res.status(400).json({
       success: false,
@@ -26,6 +32,7 @@ exports.createProduct = tryCatchAsyncError(async (req, res, next) => {
     message:'product created successfully',
     product
   })
+}
 })
 
 // get Product by Id OR get Product details 

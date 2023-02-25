@@ -5,15 +5,15 @@ const axios = require('axios');
 
 const app = express();
 const arryOfUrl = [
-    // 'Mobiles',
+    // 'Mobiles/nokia',
     // 'led-tv',
     // 'ac',
-    // 'Smart-Watches',
-    // 'Wireless-Earbuds',
+    // 'Smart-Watches/samsung',
+    // 'Wireless-Earbuds/anker',
     // 'Bluetooth-Speakers',
-    // 'Power-Banks',
+    // 'chargingCables',
     // 'Laptops',
-    'Tablets',
+    // 'Tablets',
     // 'Mobiles',
 // 'Tablets',
 // 'Smart Watches',
@@ -26,10 +26,10 @@ const arryOfUrl = [
 const productsLinks = []
 const products = []
 const postProduct = async (product) => {
-  console.log('product.lenght() :>> ', product.length);
- 
+  console.log('product.lenght() :>> ', product);
+//  return
   await  product.map((product, index)=>{
-    console.log('product :>> ', product.productUrl );
+    // console.log('product :>> ', product.productUrl );
     // console.log('index :>> ', index );
     // return
      axios.post(
@@ -62,13 +62,14 @@ const getProductsData = async (productsLinks) => {
             $('#product-main', html).each(function() {
              const productUrl = url
             //  const images = $('.product-image-main').find('amp-img').attr('src');
-             const name = $('.product-title').find('h2').text();
+             const name = $('.product-title').find('h3').text();
+             const rating = $('.rating-points').text();
               const store = 'PriceOye'
              const brand = $('.breadcrumb a').eq(1).text();
              const ramRom = $('.ga-dataset.active').find('span').text();
              const Availability = $('.summary-price.text-black.bold.stock-status').text()?.trim();
              const price = $('.summary-price.text-black.price-size-lg').text().split('Rs.')[1]?.trim();
-             const category = 'Tablets'
+             const category = 'Mobiles-Accessories'
             //  const url = $('#product-summary').find('a').attr('href')
             //  console.log('price:>>' , price);
             //  console.log('brand:>>' , brand);
@@ -76,8 +77,8 @@ const getProductsData = async (productsLinks) => {
             //  console.log('Availability :>> ', Availability);
             //  console.log('ramRom :>> ', ramRom);
             //  console.log('url :>> ', url);
-             console.log('productUrl :>> ', productUrl);
-              products.push({price,Availability,name ,description:name, brand ,productUrl,imgUrl ,store, category})
+             console.log('rating :>> ', rating);
+              products.push({price,Availability,name ,description:name, brand ,productUrl,imgUrl ,store, category , rating})
               
               postProduct(products);
 
@@ -95,12 +96,10 @@ await axios(`https://priceoye.pk/${category}`)
     $('.productBox.b-productBox', html).each(function() {
      const url = $(this).find('a').attr('href')
      const imgUrl = $(this).find('amp-img').attr('src')
-    //  console.log('url :>> ', url ,imgUrl);
       productsLinks.push({url,imgUrl,category})
-      // console.log('productsLinks in  :>> ', productsLinks);
     })
     
-    console.log('productsLinks in  :>> ', productsLinks.length);
+    // console.log('productsLinks in  :>> ', productsLinks.length);
  await getProductsData(productsLinks)
 }).catch(err => console.error(err));
 })

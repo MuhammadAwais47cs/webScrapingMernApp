@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {useSelector , useDispatch} from 'react-redux';
 import "./Products.css";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams ,useNavigate } from 'react-router-dom';
 import {getProductDetails , getProduct} from '../../actions/productAction';
 import Pagination from "react-js-pagination";
 import Product from '../Home/Product';
@@ -10,10 +10,12 @@ import MetaData from '../layout/MetaData';
 import Loader from '../layout/Loader/Loader';
 function ProductDetails() {
    const params = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
    const { keyword} = params
+   const { state } = location
    const dispatch = useDispatch();
    const [currentPage, setCurrentPage] = useState(1);
-  const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
   const [price, setPrice] = useState([1,500000]);
    const categories = [
@@ -31,6 +33,7 @@ function ProductDetails() {
    const Brands = ["Apple","Samsung","Realme", "Infinix", "Oppo", "Xiaomi", "Vivo", "Tecno",  "Nokia"];
 
    const { loading, error, products,resultPerPage, productsCount } = useSelector(state=>state.products)
+   console.log('state, category :>> ', state);
    console.log(' useSelector(state=>state.products) :>> ',  useSelector(state=>state.products));
 
   //  const keyword
@@ -43,17 +46,17 @@ function ProductDetails() {
     setPrice(newPrice)
   }
    useEffect(()=>{
-     console.log('objec :>> ', error);
+     
      if(error) return alert.error(error)
-    dispatch(getProduct(keyword, currentPage, price, category ,brand));
-   } , [dispatch,keyword,currentPage,price,category, error,brand]);
+    dispatch(getProduct(keyword, currentPage, price, state ));
+   } , [dispatch,keyword,currentPage,price,state, error]);
   return (
 
    <>
     {loading ? (<Loader/>) : 
     (
       <>
-    <div className=''>
+    <div className='pt-5 mt-5'>
     <MetaData title="PRODUCTS -- ECOMMERCE" />
     <h2 className="productsHeading">Products</h2>
 
@@ -76,7 +79,8 @@ function ProductDetails() {
                 <li
                   className="category-link"
                   key={name}
-                  onClick={() => setCategory(value)}
+                  // onClick={() => setCategory(value)}
+                  onClick={() => navigate(`/products`, { state: { category: value } })}
                 >
                   {name}
                   </li>
@@ -88,13 +92,14 @@ function ProductDetails() {
                   <p  className='text-danger'>Shop By Brand</p>
                   
             <ul className="categoryBox">
-              {Brands.map((category) => (
+              {Brands.map((brand) => (
                 <li
                   className="category-link"
-                  key={category}
-                  onClick={() => setBrand(category)}
+                  key={brand}
+                  // onClick={() => setBrand(category)}
+                  onClick={() =>navigate(`/products`, { state: { brand }})}
                 >
-                  {category}
+                  {brand}
                 </li>
               ))}
             </ul>

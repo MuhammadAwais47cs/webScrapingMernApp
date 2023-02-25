@@ -27,9 +27,9 @@ function Home () {
   useEffect(()=>{
     console.log('objec :>> ', error);
     if(error) return alert.error(error)
-    if (category)   navigate(`/products/${category}`);
+    
     dispatch(getProduct())
-  } , [dispatch,category,error]);
+  } , [dispatch,error]);
 
   const catgory = [
    {  name :'Mobiles',            category:'Mobiles',url:'https://static.priceoye.pk/images/home/mobiles.svg'},
@@ -37,8 +37,8 @@ function Home () {
    {  name :'Wireless Earbuds',   category:'Wireless-Earbuds', url:'https://static.priceoye.pk/images/home/wireless-earbuds.svg'},
    {  name :'Bluetooth Speakers', category:'Bluetooth-Speakers',url:'https://static.priceoye.pk/images/home/bluetooth-speakers.svg'},
    {  name :'Power Banks',        category:'Power-Banks', url:'https://static.priceoye.pk/images/home/power-banks.svg'},
-   {  name :'Laptops',            category:'Laptops',url:'https://static.priceoye.pk/images/home/laptops.svg', height:'100px' },
-   {  name :'Tablets',            category:'Tablets', url:'https://static.priceoye.pk/images/home/tablets.svg' ,height:'100px' },
+   {  name :'Laptops',            category:'Laptops',url:'https://static.priceoye.pk/images/home/laptops.svg', height:'90px' },
+   {  name :'Tablets',            category:'Tablets', url:'https://static.priceoye.pk/images/home/tablets.svg' ,height:'90px' },
   //  {  name :'TV',                 category:'TV', url:'https://static.priceoye.pk/images/home/tablets.svg'}
   ]
   
@@ -53,7 +53,7 @@ const product = [{
       {loading? (<Loader/>) :
     (
       <>
-      <Header/>
+      // <Header/>
       <MetaData title={'Ecommerce'}/>
       <div className="banner">
        <div id="carouselExample" className="carousel slide pointer-event">
@@ -88,16 +88,16 @@ const product = [{
         <div
         className="category-link d-flex flex-column  mx-2"
         key={category}
-        onClick={() =>  setCategory(category)}
+        onClick={() =>  navigate(`/products`, {state :{category}})}
       >
-     <div className='my-4 mx-auto'>
+     <div className='categoryImg my-4 mx-auto'>
       
-     <img  src={url} width='100vmax' height={height} alt=""/ >
+     <img  src={url}   height={height} alt=""/ >
      </div>
      
-     <div className='h5 text-center'>
+     <span className='text-center'>
      {name}
-     </div>
+     </span>
      
     </div>
      
@@ -122,8 +122,6 @@ const product = [{
      
     </div>
     </div>
-<Feature/>    
-<Footer/>
       </>
     )}
         

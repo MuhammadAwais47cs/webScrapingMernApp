@@ -1,5 +1,5 @@
 import React, { useState , useEffect } from 'react'
-import logo from '../assets/logo.png'
+import logo from '../assets/2.png'
 import { FaSearch, FaPowerOff } from "react-icons/fa";
 import {useNavigate} from 'react-router-dom';
 import  Search  from '../search/Search';
@@ -11,6 +11,7 @@ function Header() {
       const catogary = [  
         {
           name: "Mobiles",
+          value: "Mobiles",
           icon: "cui-dollar",
           children: [
             {
@@ -19,16 +20,12 @@ function Header() {
               // icon: "cui-bookmark",
             },
             {
-              name: " Infinix",
+              name: "Infinix",
               // url: "/WhatType",
               // icon: "cui-pencil",
             },
             
-            {
-              name: " Itel",
-              // url: "/Mileage",
-              // icon: "cui-pencil",
-            },
+            
             {
               name: "Nokia",
               // url: "/CreateSubsistence",
@@ -65,17 +62,13 @@ function Header() {
               // icon: "cui-graph",
               // attributes: { disabled: true },
             },
-            {
-              name: "More Brands",
-              // url: "/OverviewInvoice33",
-              // icon: "cui-graph",
-              // attributes: { disabled: true },
-            },
+           
             
           ],
         },
         {
           name: "Tablets",
+          value: "Tablets",
           // icon: "cui-dollar",
           children: [
             {
@@ -84,47 +77,44 @@ function Header() {
               // icon: "cui-bookmark",
             },
             {
-              name: "Dany ",
+              name: "Dany",
               // url: "/WhatType",
               // icon: "cui-pencil",
             },
             
             {
-              name: "Huawei ",
+              name: "Huawei",
               // url: "/Mileage",
               // icon: "cui-pencil",
             },
             {
-              name: "Samsung ",
+              name: "Samsung",
               // url: "/CreateSubsistence",
               // icon: "cui-pencil",
             },
-            {
-              name: "More Brandsrview",
-              // url: "/CreatePurchaseCreditNote",
-              // icon: "cui-credit-card",
-            },
+            
     
           
           ],
         },
         {
           name: "Smart Watches",
+          value: "Smart-Watches",
           icon: "cui-dollar",
           children: [
             {
-              name: "Apple ",
+              name: "Apple",
               url: "/OverviewMoneyOut",
               icon: "cui-bookmark",
             },
             {
-              name: " Huawei ",
+              name: "Huawei",
               url: "/WhatType",
               icon: "cui-pencil",
             },
             
             {
-              name: " Samsung",
+              name: "Samsung",
               url: "/Mileage",
               icon: "cui-pencil",
             },
@@ -133,50 +123,44 @@ function Header() {
               url: "/CreateSubsistence",
               icon: "cui-pencil",
             },
-            {
-              name: "More Brands",
-              url: "/CreatePurchaseCreditNote",
-              icon: "cui-credit-card",
-            },
+             
       
           ],
         },
         {
           name: "Wireless Earbuds",
+          value: "Wireless-Earbuds",
           icon: "cui-dollar",
           children: [
             {
-              name: "Anker",
+              name: "Apple",
               url: "/OverviewMoneyOut",
               icon: "cui-bookmark",
             },
             {
-              name: "Baseus",
+              name: "Realme",
               url: "/WhatType",
               icon: "cui-pencil",
             },
             
             {
-              name: "Ronin ",
+              name: "Audionic",
               url: "/Mileage",
               icon: "cui-pencil",
             },
             {
-              name: "Xiaomi ",
+              name: "Infinix",
               url: "/CreateSubsistence",
               icon: "cui-pencil",
             },
-            {
-              name: "More Brands",
-              url: "/CreatePurchaseCreditNote",
-              icon: "cui-credit-card",
-            },
+            
     
             
           ],
         },
         {
           name: "Mobiles Accessories",
+          value: "Mobiles-Accessories",
           icon: "cui-dollar",
           children: [
             {
@@ -224,6 +208,7 @@ function Header() {
         },
         {
           name: "Laptops",
+          value: "Laptops",
           icon: "cui-dollar",
           children: [
             {
@@ -247,16 +232,13 @@ function Header() {
               url: "/CreateSubsistence",
               icon: "cui-pencil",
             },
-            {
-              name: "More Brands",
-              url: "/CreatePurchaseCreditNote",
-              icon: "cui-credit-card",
-            },
+          
       
           ],
         },
         {
           name: "TV & Home Appliances",
+          value: "TV&Home-Appliances",
           icon: "cui-dollar",
           children: [
             {
@@ -278,54 +260,24 @@ function Header() {
            
           ],
         },
-        {
-          name: "Motorcycle",
-          icon: "cui-dollar",
-          children: [
-            {
-              name: "Honda",
-              url: "/OverviewMoneyOut",
-              icon: "cui-bookmark",
-            },
-            {
-              name: "Union Star",
-              url: "/WhatType",
-              icon: "cui-pencil",
-            },
-            
-            {
-              name: "Unique",
-              url: "/Mileage",
-              icon: "cui-pencil",
-            },
-            {
-              name: "Yamaha",
-              url: "/CreateSubsistence",
-              icon: "cui-pencil",
-            },
-            {
-              name: "More Brands",
-              url: "/CreatePurchaseCreditNote",
-              icon: "cui-credit-card",
-            },
-    
-            
-          ],
-        },
+        
       ]
      const searchToggle = ()=> {
       setOpenModel(!openModel)
      }
      useEffect(()=>{
       
-      if (cat)   navigate(`/products/${cat}`);
+      // if (cat)   navigate(`/products/${cat}`, { state:  });
      
     } , [ cat ]);
     return (
         <>
        
-        <nav className="navbar navbar-expand-sm bg-danger text-white  fixed-top">
+        <nav className="navbar navbar-expand-lg bg-danger text-white  fixed-top">
         <div className="container-fluid ">
+        <a class="navbar-brand" href="/" >
+        <img src={logo} alt="Bootstrap" width="180vmax" />
+      </a>
         <button className="navbar-toggler" type="button"
          data-bs-toggle="collapse" 
          data-bs-target="#navbarTogglerDemo01"
@@ -339,7 +291,7 @@ function Header() {
               <ul className="navbar-nav mx-auto justify-content-center flex-grow-1 pe-3">
                
                 
-             {catogary.map(({name,children})=>(
+             {catogary.map(({name,value,children})=>(
               <>
               <li className="nav-item dropdown ms-3" key={name}>
               <a
@@ -353,8 +305,8 @@ function Header() {
                  {name}
               </a>
               <ul className="dropdown-menu">
-              {children.map(({name})=>(
-                <li><p className="dropdown-item" onClick={()=>setCat(name)} key={name}  >{name}</p></li>
+              {children.map(({name: childrenName})=>(
+                <li><p className="dropdown-item" onClick={()=> navigate(`/products/${childrenName}`, { state:{ category: value }})} key={childrenName}  >{childrenName}</p></li>
              ))}
 
                 
