@@ -30,6 +30,7 @@ function ProductDetails() {
     
     
    ]
+   const noProduct = { name:"No Product Found"}
    const Brands = ["Apple","Samsung","Realme", "Infinix", "Oppo", "Xiaomi", "Vivo", "Tecno",  "Nokia"];
 
    const { loading, error, products,resultPerPage, productsCount } = useSelector(state=>state.products)
@@ -56,7 +57,7 @@ function ProductDetails() {
     {loading ? (<Loader/>) : 
     (
       <>
-    <div className='pt-5 mt-5'>
+    <div className='productsPage pt-5 mt-5'>
     <MetaData title="PRODUCTS -- ECOMMERCE" />
     <h2 className="productsHeading">Products</h2>
 
@@ -65,6 +66,14 @@ function ProductDetails() {
         products.map((product) => (
           <Product key={product._id} product={product} />
         ))}
+        {console.log('products.lenght == 0  :>> ',products, products[0] === undefined ,noProduct   )}
+      {products[0] === undefined &&
+        <div className="col-md-6 border rounded-5 shadow py-5 my-5 error-container ">
+        <h2 className='text-center'>No Product Found</h2>
+        <p className='px-4 text-center text-secondary my-3'>Sorry, we couldn't find any products matching your search criteria. Please try again with a different search term or refine your filters.</p>
+      </div>
+         
+      }
     </div>
     <div className='filterBox '>
   {/*  <label for="customRange2" class="form-label">Price</label>

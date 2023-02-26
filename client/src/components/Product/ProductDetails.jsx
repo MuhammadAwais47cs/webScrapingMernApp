@@ -1,7 +1,7 @@
 import React, { useEffect , useState } from 'react'
 import {useSelector , useDispatch} from 'react-redux';
 import {   useParams } from 'react-router-dom';
-import {getProductDetails} from '../../actions/productAction';
+import {getProductDetails , getProduct} from '../../actions/productAction';
 import MetaData from '../layout/MetaData';
 import Loader from "../layout/Loader/Loader";
 import './ProductDetails.css'
@@ -10,6 +10,31 @@ function ProductDetails() {
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
+  const { products,resultPerPage, productsCount } = useSelector(state=>state.products)
+console.log('products :>> ', products);
+        let pushDataArray=[];
+        // console.table(products)
+if(products  ){
+  console.log('in ma a gya ha ');
+  for (let i = 1; i < products.length; i++) {
+         console.log('pushDataArray[i]?.store !==  products[i]?.store :>> ',products[i]?.store,products[i]?.store, products[i]?.store !==  products[i+1]?.store);
+    
+   if(products[i]?.store !==  products[i+1]?.store){
+    pushDataArray.push({
+      ...products[i],
+      //  
+      "store":products[i]["store"] 
+     })
+   }
+console.log('pushDataArray',pushDataArray); // Output: ['ali', 'asad', 'john']
+ 
+   }
+}
+const key = 'store';
+
+const arrayUniqueByKey = [...new Map(products?.map(item =>
+  [item[key], item])).values()];
+console.log('arrayUniqueByKey :>> ', arrayUniqueByKey);
    const dispatch = useDispatch();
    const { id } = useParams();
   useEffect(() => {
@@ -19,7 +44,14 @@ function ProductDetails() {
 
    
     dispatch(getProductDetails(id));
-  }, [dispatch, id,error, alert,]);
+    // console.log('products.lenght < 1 :>> ',!products?.name,products, products.lenght < 1);
+    if(!products?.name) 
+    {
+      // console.log('products.lenght in  < 1 :>> ',products.lenght,products, products.lenght < 1);
+      dispatch(getProduct(product.name  ));
+    }
+
+  }, [dispatch, id,product.name,error, alert,]);
 
   const handleLinkClick = (url) => {
     window.open(url, '_blank');
@@ -72,7 +104,7 @@ function ProductDetails() {
               </span>
             </div>
             <div className="detailsBlock-3">
-              <h1>{`Rs:${product.price}`}</h1>
+              
               <div className="detailsBlock-3-1">
                
  
@@ -88,42 +120,44 @@ function ProductDetails() {
         </div>
         </div>
         <div className='container-fluid my-3 mb-md-5'>
-        <div className=' row mx-0 px-0 mb-4 bg-danger rounded-pill'>
-         <div className='col-md-11  ms-4  py-3  ps-3 text-white '>
-         <h5 className='' > Compare {product.name } {' '}Prices</h5>
-         </div>
+        <div className=' row mx-0 px-0 mb-4 py-3 bg-danger rounded-pill'>
+         <span className="detailsBlock-2-span ">
+         {" "}<span className='h6 text-white '>
+         Compare {product.name } {' '}Prices
+         </span>
+       
+       </span>
        
         </div>
-        <div className='row mx-0 px-0 py-2 ms-4 '>
-         <div className='col-md-3'>
-         <h5 className=' ' >Store  </h5>
-         </div>
-         <div className='col-md-3'>
-         <h5 className=' ' >Condition  </h5>
-         </div>
-         <div className='col-md-3'>
-         <h5 className=' ' >Price </h5>
-         </div>
-         <div className='col-md-3'>
-         <h5 className=' ' > </h5>
-         </div>
-       
-        </div>
-        <div className='row mx-0 px-0 ms-4 bg-light py-2 pt-3 rounded-3 ps-4  '>
-         <div className='col-md-3'>
-         <h6 className=' ' >{product.store}  </h6>
-         </div>
-         <div className='col-md-3'>
-         <h6 className=' ' >New  </h6>
-         </div>
-         <div className='col-md-3'>
-         <h6 className=' ' >Rs : {product.price} </h6>
-         </div>
-         <div className='col-md-3'>
-            <button type="" className='btn btn-outline-success rounded-pill' onClick={()=> handleLinkClick(product.productUrl)}>Visit Store</button>
-         </div>
-       
-        </div>
+        
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Store</th>
+      <th scope="col">Condition</th>
+      <th scope="col">Price</th>
+      <th scope="col">      </th>
+    </tr>
+  </thead>
+  <tbody>
+  {arrayUniqueByKey.map((product,index)=>(
+    <tr>
+    <th scope="row" key={index}>{index+1}</th>
+    <td>{product.store}</td>
+    <td>new</td>
+    <td>Rs : {product.price}</td>
+    <td>
+    <button type="" className='btn btn-outline-success rounded-pill' onClick={()=> handleLinkClick(product.productUrl)}>Visit Store</button>
+    
+    </td>
+  </tr>
+  ))}
+   
+   
+   
+  </tbody>
+</table>
       </div>
         
       </>

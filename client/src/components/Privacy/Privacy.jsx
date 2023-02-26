@@ -16,7 +16,7 @@ function Privacy() {
            <>
            <div className="col-md-12 pe-md-3" key={id}>
            <h2 className='py-3' >{heading}</h2>
-           <p className='pe-md-5 me-lg-5' >{para} </p>
+           <p className='text-secondary pe-md-5 me-lg-5' >{para} </p>
    
           
            </div>
@@ -29,7 +29,6 @@ function Privacy() {
         
       
       
-        <Footer/>
         </section>
         </>
     )

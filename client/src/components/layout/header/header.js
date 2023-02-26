@@ -278,19 +278,13 @@ function Header() {
         <a class="navbar-brand" href="/" >
         <img src={logo} alt="Bootstrap" width="180vmax" />
       </a>
-        <button className="navbar-toggler" type="button"
-         data-bs-toggle="collapse" 
-         data-bs-target="#navbarTogglerDemo01"
-          aria-controls="navbarTogglerDemo01"
-           aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
           
          
         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
               <ul className="navbar-nav mx-auto justify-content-center flex-grow-1 pe-3">
-               
-                
              {catogary.map(({name,value,children})=>(
               <>
               <li className="nav-item dropdown ms-3" key={name}>
@@ -308,16 +302,10 @@ function Header() {
               {children.map(({name: childrenName})=>(
                 <li><p className="dropdown-item" onClick={()=> navigate(`/products/${childrenName}`, { state:{ category: value }})} key={childrenName}  >{childrenName}</p></li>
              ))}
-
-                
-               
-                
               </ul>
             </li>
             </>
-            
           ))}
-               
               </ul>
              
             </div>

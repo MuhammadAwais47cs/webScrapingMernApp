@@ -19,15 +19,15 @@ function ContactUs() {
         <div className="col-md-4 mt-5">
         <div className='px-5'>
             <h2 className='py-5'>Contact Details</h2>
-            <p>
-            pakistan —
-            </p>
-            <p>
-            5535 balboa blvd Encino CA
-            </p>
             
+            <h6>
+            23 Takbeer Block Bahria Town Lahore
+            </h6>
+            <h6>
+            pakistan 
+            </h6>
             <h4 className=' mt-5 mb-4'>
-            +92 020 0780090
+            +92-312-4709123
             </h4>
             <p >
             info@shoppingmall.com
@@ -38,26 +38,27 @@ function ContactUs() {
         <form className="row g-3 pt-5 ">
         <h2 className='py-5' >Contact Form</h2>
         <div className="col-md-6">
-         <label for="inputEmail4" className="form-label">First name</label>
+         <label for="inputEmail4" className="form-label">First name <span className='text-danger'>*</span></label>
 
-        <input type="text" className="form-control" placeholder="" aria-label="First name"/>
+        <input type="text" required className="form-control" placeholder="" aria-label="First name"/>
       </div>
       <div className="col-md-6">
-        <label for="inputEmail4" className="form-label">Last name</label>
+        <label for="inputEmail4"  className="form-label">Last name  </label>
 
-        <input type="text" className="form-control" placeholder="" aria-label="Last name"/>
+        <input type="text"   className="form-control" placeholder="" aria-label="Last name"/>
       </div>
     <div className="col-md-6">
-    <label for="inputEmail4" className="form-label">Email</label>
-    <input type="email" className="form-control" id="inputEmail4"/>
+    <label for="inputEmail4" className="form-label">Email <span className='text-danger'>*</span></label>
+    <input type="email" required className="form-control" id="inputEmail4"/>
   </div>
-  <div className="col-md-6">
-    <label for="inputPassword4" className="form-label">Password</label>
-    <input type="password" className="form-control" id="inputPassword4"/>
+    <div className="col-md-6">
+    <label for="inputEmail4" className="form-label">Number  </label>
+    <input type="text"   className="form-control" id="inputEmail4"/>
   </div>
+ 
   <div className="col-md-12">
-  <label for="exampleFormControlTextarea1" className="form-label">Message</label>
-  <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  <label for="exampleFormControlTextarea1" className="form-label">Message <span className='text-danger'>*</span></label>
+  <textarea required className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 </div>
   <div className="col-12">
     <button type="submit" className="btn btn-outline-danger rounded-pill">Get In Touch</button>
@@ -66,7 +67,7 @@ function ContactUs() {
         </div>
         
         </div>
-        <Footer/>
+       
         </section>
         </>
     )

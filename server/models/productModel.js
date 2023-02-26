@@ -21,10 +21,10 @@ const productSchema = mongoose.Schema({
     type: String,
     required: [true, "Please Enter product Description"],
   },
-  rating: {
-    type: String,
-    required: [true, "Please Enter product rating"],
-  },
+  // rating: {
+  //   type: String,
+  //   required: [true, "Please Enter product rating"],
+  // },
   imgUrl: {
     type: String,
     required: [true, "Please Enter product imgUrl"],

@@ -11,14 +11,14 @@ if (imgUrl == 'https://static.priceoye.pk/images/badges/fever-cricket.png'){
     message: 'A product with the same name already exists',
   });
 } else {
-  const existingProduct = await Product.findOne({ name });
-  console.log('existingProduct :>> ', existingProduct);
-  if (existingProduct) {
-    return res.status(400).json({
-      success: false,
-      message: 'A product with the same name already exists',
-    });
-  }
+  // const existingProduct = await Product.findOne({ name });
+  // console.log('existingProduct :>> ', existingProduct);
+  // if (existingProduct) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: 'A product with the same name already exists',
+  //   });
+  // }
   // const existingProducts = await Product.find({ name });
   // if (existingProducts.length > 0) {
   //   const deletedProducts = await Product.deleteMany({ name });

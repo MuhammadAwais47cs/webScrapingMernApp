@@ -10,6 +10,7 @@ class ApiFeatures {
                 $options:'i',
             },
         } : {};
+        console.log('this :>> ',keyword )
      this.query = this.query.find({...keyword})
      return this;
     }
