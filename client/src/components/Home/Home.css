@@ -126,10 +126,7 @@
     
     transform: translateY(-1vmax);
   }
-     .categoryImg > img {
-      /* width: 100vmax; */
-
-    }
+   
   @media screen and (max-width: 600px) {
     .carousel-item > img {
       width: 65vmax;
@@ -140,6 +137,10 @@
     .categoryBar {
      overflow-y: auto;
       
+    }
+    .categoryImg > img {
+      width: 8vmax;
+
     }
     
     .productCard > div {

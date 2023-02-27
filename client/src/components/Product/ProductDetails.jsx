@@ -7,10 +7,10 @@ import Loader from "../layout/Loader/Loader";
 import './ProductDetails.css'
 function ProductDetails() {
    
-  const { product, loading, error } = useSelector(
+  const { product, error } = useSelector(
     (state) => state.productDetails
   );
-  const { products,resultPerPage, productsCount } = useSelector(state=>state.products)
+  const { loading, products,resultPerPage, productsCount } = useSelector(state=>state.products)
 console.log('products :>> ', products);
         let pushDataArray=[];
         // console.table(products)
@@ -141,7 +141,7 @@ console.log('arrayUniqueByKey :>> ', arrayUniqueByKey);
     </tr>
   </thead>
   <tbody>
-  {arrayUniqueByKey.map((product,index)=>(
+  {arrayUniqueByKey?.length > 0 ? ( arrayUniqueByKey.map((product,index)=>(
     <tr>
     <th scope="row" key={index}>{index+1}</th>
     <td>{product.store}</td>
@@ -152,7 +152,20 @@ console.log('arrayUniqueByKey :>> ', arrayUniqueByKey);
     
     </td>
   </tr>
-  ))}
+  ))
+  ) :(
+    <tr>
+    <th scope="row" >1</th>
+    <td>{product.store}</td>
+    <td>new</td>
+    <td>Rs : {product.price}</td>
+    <td>
+    <button type="" className='btn btn-outline-success rounded-pill' onClick={()=> handleLinkClick(product.productUrl)}>Visit Store</button>
+    
+    </td>
+  </tr>
+  )
+}
    
    
    
