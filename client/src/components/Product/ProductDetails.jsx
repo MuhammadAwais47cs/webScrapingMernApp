@@ -135,18 +135,19 @@ console.log('arrayUniqueByKey :>> ', arrayUniqueByKey);
     <tr>
       <th scope="col">#</th>
       <th scope="col">Store</th>
-      <th scope="col">Condition</th>
+      <th scope="col">Stock</th>
       <th scope="col">Price</th>
-      <th scope="col">      </th>
+      <th scope="col">Rating       </th>
     </tr>
   </thead>
   <tbody>
-  {arrayUniqueByKey?.length > 0 ? ( arrayUniqueByKey.map((product,index)=>(
+  {arrayUniqueByKey?.length > 1 ? ( arrayUniqueByKey.map((product,index)=>(
     <tr>
     <th scope="row" key={index}>{index+1}</th>
     <td>{product.store}</td>
-    <td>new</td>
+    <td>{product?.stock }</td>
     <td>Rs : {product.price}</td>
+    <td>{product?.rating}</td>
     <td>
     <button type="" className='btn btn-outline-success rounded-pill' onClick={()=> handleLinkClick(product.productUrl)}>Visit Store</button>
     
@@ -157,8 +158,9 @@ console.log('arrayUniqueByKey :>> ', arrayUniqueByKey);
     <tr>
     <th scope="row" >1</th>
     <td>{product.store}</td>
-    <td>new</td>
+    <td>{product?.Stock}</td>
     <td>Rs : {product.price}</td>
+    <td>{product?.rating}</td>
     <td>
     <button type="" className='btn btn-outline-success rounded-pill' onClick={()=> handleLinkClick(product.productUrl)}>Visit Store</button>
     

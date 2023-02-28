@@ -29,9 +29,9 @@ const postProduct = async (product) => {
   console.log('product.lenght() :>> ', product);
 //  return
   await  product.map((product, index)=>{
-    // console.log('product :>> ', product.productUrl );
+    console.log('product :>> ', product.productUrl );
     // console.log('index :>> ', index );
-    // return
+    return
      axios.post(
       "http://localhost:4000/api/v1/products/new",
       { product },
@@ -74,15 +74,15 @@ const getProductsData = async (productsLinks) => {
              const store = 'Shophive.com';
              const brand = $('.brand-link ').attr('title');
              const category = 'Laptops'
+             const rating = $('.rating-points').text();
+             const ramRom = $('.ga-dataset.active').find('span').text();
             //  const brand = $('.brand a').find('span').text();
             //  const name = $('.product-title').find('h3').text();
-             const rating = $('.rating-points').text();
-             // const store = 'PriceOye'
-             //  const brand = $('.breadcrumb a').eq(1).text();
-             const ramRom = $('.ga-dataset.active').find('span').text();
-             //  const Availability = $('.summary-price.text-black.bold.stock-status').text()?.trim();
-             //  const price = $('.summary-price.text-black.price-size-lg').text().split('Rs.')[1]?.trim();
-             //  const category = 'Mobiles-Accessories'
+            // const store = 'PriceOye'
+            //  const brand = $('.breadcrumb a').eq(1).text();
+            //  const Availability = $('.summary-price.text-black.bold.stock-status').text()?.trim();
+            //  const price = $('.summary-price.text-black.price-size-lg').text().split('Rs.')[1]?.trim();
+            //  const category = 'Mobiles-Accessories'
             //  const url = $('#product-summary').find('a').attr('href')
             //  console.log('price:>>' , price);
             //  console.log('brand:>>' , brand);
@@ -103,8 +103,9 @@ const getProductsData = async (productsLinks) => {
 }
 arryOfUrl.map( async (category)=>{
 // console.log('`https://priceoye.pk` :>> ', `https://priceoye.pk/${url}`);
-// await axios(`https://priceoye.pk/${category}`)
-await axios(`https://www.shophive.com/laptops-computers/laptops/lenovo`)
+// await axios(`https://priceoye.pk/${category}`)  // priceoye.pk
+await axios(`https://homeshopping.pk/categories/Apple-iPhone-Prices-in-Pakistan/`)  // homeshopping.pk
+// await axios(`https://www.shophive.com/laptops-computers/laptops/lenovo`)
 // await axios(`https://www.ishopping.pk/electronics/mobile-phones-tablet-pc/mobile-phones-prices-in-pakistan/apple-iphone/iphone-14-pro-max.html`)
 .then( async (response)=>{
     const html = response.data

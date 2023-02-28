@@ -35,7 +35,7 @@ function ProductDetails() {
 
    const { loading, error, products,resultPerPage, productsCount } = useSelector(state=>state.products)
    console.log('state, category :>> ', state);
-   console.log(' useSelector(state=>state.products) :>> ',  useSelector(state=>state.products));
+  //  console.log(' useSelector(state=>state.products) :>> ',  useSelector(state=>state.products));
 
   //  const keyword
   const setCurrentPageNo = (e)=> {
@@ -59,7 +59,10 @@ function ProductDetails() {
       <>
     <div className='productsPage pt-5 mt-5'>
     <MetaData title="PRODUCTS -- ECOMMERCE" />
-    <h2 className="productsHeading">Products</h2>
+    {}
+    <h2 className="productsHeading">{state?.category ? state?.category : state?.brand } 
+    
+    </h2>
 
       <div className="products ms-3 ">
       {products &&
@@ -70,6 +73,7 @@ function ProductDetails() {
       {products[0] === undefined &&
         <div className="col-md-6 border rounded-5 shadow py-5 my-5 error-container ">
         <h2 className='text-center'>No Product Found</h2>
+        <img src="https://cdn.homeshopping.pk/product_images/r/178/apple-iphone-se-2020-2__50224_thumb.jpg" alt=""/>
         <p className='px-4 text-center text-secondary my-3'>Sorry, we couldn't find any products matching your search criteria. Please try again with a different search term or refine your filters.</p>
       </div>
          
