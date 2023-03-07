@@ -1,16 +1,18 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const cors = require('cors');
-const mongoose = require( 'mongoose');
-const errorMiddleware = require('./middleware/Error');
+const cors = require("cors");
+const mongoose = require("mongoose");
+const errorMiddleware = require("./middleware/Error");
 // const connection_url = 'mongodb+srv://admin:admin@cluster0.rzbahaf.mongodb.net/?retryWrites=true&w=majority'
 app.use(express.json());
-app.use(cors())
-// middleware for error 
-app.use(errorMiddleware) 
+app.use(cors());
+// middleware for error
+app.use(errorMiddleware);
 
-// Routes Imports 
+// Routes Imports
 
-const products = require('./routes/productsRoutes');
-app.use('/api/v1',products)
-module.exports = app
+const products = require("./routes/productsRoutes");
+const user = require("./routes/userRoute");
+app.use("/api/v1", products);
+app.use("/api/v1", user);
+module.exports = app;
