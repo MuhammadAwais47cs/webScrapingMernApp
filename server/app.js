@@ -3,9 +3,11 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const errorMiddleware = require("./middleware/Error");
+const cookieParser = require("cookie-parser");
 // const connection_url = 'mongodb+srv://admin:admin@cluster0.rzbahaf.mongodb.net/?retryWrites=true&w=majority'
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 // middleware for error
 app.use(errorMiddleware);
 

@@ -1,4 +1,6 @@
 // Create Token and saving in cookie
+const dotenv = require("dotenv");
+dotenv.config({ path: "../config/config.env" });
 
 const sendToken = (user, statusCode, res) => {
   const token = user.getJWTToken();
@@ -16,6 +18,10 @@ const sendToken = (user, statusCode, res) => {
     user,
     token,
   });
+  // return res.status(200).json({
+  //   success: true,
+  //   product,
+  // });
 };
 
 module.exports = sendToken;

@@ -36,6 +36,7 @@ import {
   USER_DETAILS_FAIL,
   CLEAR_ERRORS,
 } from "../constant/userConstants";
+import { baseurl } from "../baseurl";
 import axios from "axios";
 
 // Login
@@ -46,41 +47,49 @@ export const login = (email, password) => async (dispatch) => {
     const config = { headers: { "Content-Type": "application/json" } };
 
     const { data } = await axios.post(
-      `/api/v1/login`,
+      `${baseurl}/api/v1/login`,
       { email, password },
       config
     );
 
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
   } catch (error) {
-    dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
+    dispatch({ type: LOGIN_FAIL, payload: error });
   }
 };
 
 // Register
-export const register = (userData) => async (dispatch) => {
-  try {
-    dispatch({ type: REGISTER_USER_REQUEST });
+export const register =
+  ({ name, email, password }) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: REGISTER_USER_REQUEST });
+      console.log("name, email, password :>> ", name, email, password);
 
-    const config = { headers: { "Content-Type": "multipart/form-data" } };
+      const config = { headers: { "Content-Type": "application/json" } };
+      // const config = { headers: { "Content-Type": "multipart/form-data" } };
 
-    const { data } = await axios.post(`/api/v1/register`, userData, config);
+      const { data } = await axios.post(
+        `${baseurl}/api/v1/register`,
+        { name, email, password },
+        config
+      );
 
-    dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
-  } catch (error) {
-    dispatch({
-      type: REGISTER_USER_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
+      dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
+    } catch (error) {
+      dispatch({
+        type: REGISTER_USER_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
 
 // Load User
 export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/me`);
+    const { data } = await axios.get(`${baseurl}/api/v1/me`);
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {

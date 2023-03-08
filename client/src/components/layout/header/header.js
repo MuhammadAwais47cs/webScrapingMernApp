@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import logo from "../assets/2.png";
-import { FaSearch, FaPowerOff } from "react-icons/fa";
+import { FaSearch, FaPowerOff, FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import Search from "../search/Search";
 function Header() {
   const navigate = useNavigate();
   const [openModel, setOpenModel] = useState(false);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
 
   const [cat, setCat] = useState(false);
   const catogary = [
@@ -327,11 +329,19 @@ function Header() {
             <FaSearch />
           </a>
         </button>
-        <button className="btn  text-white" type="submit">
-          <a href="/login" className="text-white">
-            <FaPowerOff />
-          </a>
-        </button>
+        {isAuthenticated ? (
+          <button className="btn  text-white" type="submit">
+            <a href="/login" className="text-white">
+              <FaUserCircle />
+            </a>
+          </button>
+        ) : (
+          <button className="btn  text-white" type="submit">
+            <a href="/login" className="text-white">
+              <FaPowerOff />
+            </a>
+          </button>
+        )}
       </nav>
       {openModel && <Search />}
     </>

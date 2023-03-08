@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import Header from "./components/layout/header/header.js";
@@ -12,7 +12,20 @@ import ProductDetails from "./components/Product/ProductDetails";
 import Products from "./components/Product/Products.jsx";
 import Search from "./components/layout/search/Search";
 import LoginSignUp from "./components/User/LoginSignUp";
+import store from "./store";
+import { loadUser } from "./actions/userAction";
 function App() {
+  useEffect(() => {
+    // WebFont.load({
+    //   google: {
+    //     families: ["Roboto", "Droid Sans", "Chilanka"],
+    //   },
+    // });
+
+    store.dispatch(loadUser());
+
+    // getStripeApiKey();
+  }, []);
   return (
     <>
       <Router>
