@@ -11,14 +11,28 @@ import {
 } from "../constant/productConstant";
 
 export const getProduct =
-  (keyword = "", currentPage = 1, price = [0, 500000], state, ratings = 0) =>
+  (
+    keyword = "",
+    currentPage = 1,
+    price = [0, 500000],
+    state,
+    ratings = 0,
+    proName = ""
+  ) =>
   async (dispatch) => {
     try {
       dispatch({ type: ALL_PRODUCT_REQUEST });
       let link = `${baseurl}/api/v1/products?keyword=${keyword}&page=${currentPage}`;
+
       //   let link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}`;
       //   let link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
+      if (state?.category) {
+        link = `${baseurl}/api/v1/products?keyword=${keyword}&page=${currentPage}&category=${state?.category}`;
+      }
+      if (proName) {
+        link = `${baseurl}/api/v1/products?name=${proName}`;
+      }
       if (state?.category) {
         link = `${baseurl}/api/v1/products?keyword=${keyword}&page=${currentPage}&category=${state?.category}`;
       }

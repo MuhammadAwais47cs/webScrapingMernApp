@@ -1,14 +1,28 @@
 import React, { useState, useEffect } from "react";
 import logo from "../assets/2.png";
 import { FaSearch, FaPowerOff, FaUserCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { useSelector, useDispatch } from "react-redux";
 import Search from "../search/Search";
+import Button from "react-bootstrap/Button";
+import Collapse from "react-bootstrap/Collapse";
+let bootstrap;
+const tooltipTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="tooltip"]'
+);
+const tooltipList = [...tooltipTriggerList].map(
+  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+);
 function Header() {
+  const token = localStorage.getItem("token");
+  const userName = localStorage.getItem("name");
+
   const navigate = useNavigate();
   const [openModel, setOpenModel] = useState(false);
   const { isAuthenticated, user } = useSelector((state) => state.user);
-
+  const [open, setOpen] = useState(false);
   const [cat, setCat] = useState(false);
   const catogary = [
     {
@@ -256,9 +270,9 @@ function Header() {
     <>
       <nav className="navbar navbar-expand-lg bg-danger text-white  fixed-top">
         <div className="container-fluid ">
-          <a class="navbar-brand" href="/">
+          <Link to="/" className="navbar-brand">
             <img src={logo} alt="Bootstrap" width="180vmax" />
-          </a>
+          </Link>
           <button
             class="navbar-toggler"
             type="button"
@@ -325,21 +339,26 @@ function Header() {
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
         >
-          <a href="/search" className="text-white">
+          <Link to="/search" className="text-white">
             <FaSearch />
-          </a>
+          </Link>
         </button>
-        {isAuthenticated ? (
-          <button className="btn  text-white" type="submit">
-            <a href="/login" className="text-white">
-              <FaUserCircle />
-            </a>
-          </button>
+        {token ? (
+          <NavDropdown
+            className="btn text-white"
+            title={<FaUserCircle />}
+            id="nav-dropdown"
+          >
+            <NavDropdown.Item eventKey="4.4">Profile</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item eventKey="4.1">{userName}</NavDropdown.Item>
+            <NavDropdown.Item eventKey="4.2">LogOut</NavDropdown.Item>
+          </NavDropdown>
         ) : (
           <button className="btn  text-white" type="submit">
-            <a href="/login" className="text-white">
+            <Link to="/login" className="text-white">
               <FaPowerOff />
-            </a>
+            </Link>
           </button>
         )}
       </nav>

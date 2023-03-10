@@ -50,20 +50,46 @@ exports.getProductDetails = tryCatchAsyncError(async (req, res, next) => {
 });
 exports.getAllProducts = tryCatchAsyncError(async (req, res, next) => {
   // return next(new ErrorHandler('template error'))
-  const resultPerPage = 20;
+  const resultPerPage = 60;
   const productsCount = await Product.countDocuments();
+  let query = Product.find();
 
+  if (req.query.name) {
+    query = query.where("name", new RegExp(req.query.name, "i"));
+  }
   console.log("productsCount :>> ", productsCount);
   const apiFeatures = new ApiFeatures(Product.find(), req.query)
     .search()
     .filter()
     .pagination(resultPerPage);
-  const products = await apiFeatures.query;
-  console.log("products :>> ", products);
-  if (!products) {
-    return next(new ErrorHandler(`Product not found`, 404));
+  if (req.query.name) {
+    console.log("req.query.name IF:>> ", req.query.name);
+    const products = await apiFeatures.query;
+    // const key = "store";
+    // const products = [
+    //   ...new Map(result?.map((item) => [item[key], item])).values(),
+    // ];
+
+    if (!products) {
+      return next(new ErrorHandler(`Product not found`, 404));
+    }
+    res
+      .status(200)
+      .json({ success: true, products, productsCount, resultPerPage });
+  } else {
+    console.log("req.query.name else:>> ");
+
+    const result = await apiFeatures.query;
+    const key = "name";
+    const products = [
+      ...new Map(result?.map((item) => [item[key], item])).values(),
+    ];
+
+    if (!products) {
+      return next(new ErrorHandler(`Product not found`, 404));
+    }
+    res
+      .status(200)
+      .json({ success: true, products, productsCount, resultPerPage });
   }
-  res
-    .status(200)
-    .json({ success: true, products, productsCount, resultPerPage });
 });

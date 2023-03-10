@@ -14,15 +14,7 @@ function ProductDetails() {
   let pushDataArray = [];
   // console.table(products)
   if (products) {
-    console.log("in ma a gya ha ");
     for (let i = 1; i < products.length; i++) {
-      console.log(
-        "pushDataArray[i]?.store !==  products[i]?.store :>> ",
-        products[i]?.store,
-        products[i]?.store,
-        products[i]?.store !== products[i + 1]?.store
-      );
-
       if (products[i]?.store !== products[i + 1]?.store) {
         pushDataArray.push({
           ...products[i],
@@ -30,7 +22,7 @@ function ProductDetails() {
           store: products[i]["store"],
         });
       }
-      console.log("pushDataArray", pushDataArray); // Output: ['ali', 'asad', 'john']
+      // console.log("pushDataArray", pushDataArray); // Output: ['ali', 'asad', 'john']
     }
   }
   const key = "store";
@@ -48,8 +40,9 @@ function ProductDetails() {
     dispatch(getProductDetails(id));
     // console.log('products.lenght < 1 :>> ',!products?.name,products, products.lenght < 1);
     if (!products?.name) {
-      // console.log('products.lenght in  < 1 :>> ',products.lenght,products, products.lenght < 1);
-      dispatch(getProduct(product.name));
+      let proName = product?.name;
+      console.log("products.lenght in  < 1 :>> ", proName, product?.name);
+      dispatch(getProduct("", "", "", "", "", proName));
     }
   }, [dispatch, id, product.name, error, alert]);
 

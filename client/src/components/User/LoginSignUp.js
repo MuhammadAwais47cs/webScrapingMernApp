@@ -18,9 +18,13 @@ const LoginSignUp = () => {
   // const alert = useAlert();
   const location = useLocation();
 
-  const { error, loading, isAuthenticated } = useSelector(
-    (state) => state.user
-  );
+  const {
+    error,
+    loading,
+    isAuthenticated,
+    token,
+    user: isUser,
+  } = useSelector((state) => state.user);
 
   const loginTab = useRef(null);
   const registerTab = useRef(null);
@@ -81,13 +85,16 @@ const LoginSignUp = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // alert(error);
       dispatch(clearErrors());
     }
 
     if (isAuthenticated) {
       // history.push(redirect);
       // navigate("/products");
+      localStorage.setItem("token", token);
+      localStorage.setItem("name", isUser?.name);
+
       navigate(redirect);
     }
   }, [dispatch, error, alert, isAuthenticated, redirect]);
