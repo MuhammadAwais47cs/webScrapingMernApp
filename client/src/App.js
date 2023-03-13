@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
-import Header from "./components/layout/header/header.js";
+import Header from "./components/layout/header/headerCE.js";
 import Footer from "./components/layout/footer/Footer.js";
 import Features from "./components/layout/Feature/Feature";
-import Home from "./components/Home/Home.jsx";
+import Home from "./components/Home/HomeEC.jsx";
 import ContactUs from "./components/ContactUs/ContactUs";
 import AboutUs from "./components/AboutUs/AboutUs.jsx";
 import Privacy from "./components/Privacy/Privacy.jsx";
