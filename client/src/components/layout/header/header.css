@@ -11,6 +11,29 @@ body {
   overflow-x: hidden;
 }
 
+
+/*-------------------- top header news-headlines----------------- */
+.news-headlines {
+  overflow: hidden; /* hide overflowing content */
+  height: 40px; /* adjust height as needed */
+}
+
+.news-item {
+  display: inline-block;
+  margin-right: 50px; /* adjust spacing as needed */
+  animation: slide-right 20s linear infinite; /* adjust duration as needed */
+  color: #eeeeee;
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 /*-------------------- top header section----------------- */
 .top-header {
   display: flex;
@@ -85,7 +108,7 @@ body {
   font-weight: 600;
 }
 .main-header-section .center {
-  width: 35%;
+  /* width: 35%; */
   display: flex;
   align-items: center;
   justify-content: space-between;

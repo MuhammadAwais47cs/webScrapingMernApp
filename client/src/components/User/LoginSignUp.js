@@ -25,11 +25,15 @@ const LoginSignUp = () => {
     token,
     user: isUser,
   } = useSelector((state) => state.user);
-
+  console.log(
+    "useSelector((state) => state.user);:>> ",
+    useSelector((state) => state.user)
+  );
   const loginTab = useRef(null);
   const registerTab = useRef(null);
   const switcherTab = useRef(null);
 
+  const [credential, setCredential] = useState(false);
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
@@ -81,23 +85,29 @@ const LoginSignUp = () => {
     }
   };
 
-  const redirect = location.search ? location.search.split("=")[1] : "/";
+  // const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
     if (error) {
       // alert(error);
+      setCredential(true);
       dispatch(clearErrors());
     }
 
+    if (error) {
+    }
     if (isAuthenticated) {
       // history.push(redirect);
       // navigate("/products");
+      setCredential(false);
+
       localStorage.setItem("token", token);
       localStorage.setItem("name", isUser?.name);
 
-      navigate(redirect);
+      // navigate(redirect);
+      navigate("/");
     }
-  }, [dispatch, error, alert, isAuthenticated, redirect]);
+  }, [dispatch, error, alert, isAuthenticated]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
@@ -142,8 +152,9 @@ const LoginSignUp = () => {
                     onChange={(e) => setLoginEmail(e.target.value)}
                   />
                 </div>
-                <div className="loginPassword">
+                <div className="loginPassword  ">
                   <FaUnlockAlt />
+
                   <input
                     type="password"
                     placeholder="Password"
@@ -152,6 +163,9 @@ const LoginSignUp = () => {
                     onChange={(e) => setLoginPassword(e.target.value)}
                   />
                 </div>
+                <span className="text-danger">
+                  {credential === true && "Invalid Username or Password"}
+                </span>
                 <Link to="/password/forgot">Forget Password ?</Link>
                 <input type="submit" value="Login" className="loginBtn" />
               </form>

@@ -54,25 +54,28 @@ exports.getAllProducts = tryCatchAsyncError(async (req, res, next) => {
   const productsCount = await Product.countDocuments();
   let query = Product.find();
 
-  if (req.query.name) {
-    query = query.where("name", new RegExp(req.query.name, "i"));
-  }
-  console.log("productsCount :>> ", productsCount);
+  // if (req.query.name) {
+  //   query = query.where("name", new RegExp(req.query.name, "i"));
+  // }
+  // console.log("query :>> ", query);
   const apiFeatures = new ApiFeatures(Product.find(), req.query)
     .search()
     .filter()
     .pagination(resultPerPage);
   if (req.query.name) {
-    console.log("req.query.name IF:>> ", req.query.name);
-    const products = await apiFeatures.query;
-    // const key = "store";
-    // const products = [
-    //   ...new Map(result?.map((item) => [item[key], item])).values(),
-    // ];
+    // console.log("req.query.name IF:>> ", req.query.name);
+    console.log("apiFeatures.query ", apiFeatures.query);
+    const result = await apiFeatures.query;
+    console.log("result :>> ", result);
+    const key = "store";
+    const products = [
+      ...new Map(result?.map((item) => [item[key], item])).values(),
+    ];
 
     if (!products) {
       return next(new ErrorHandler(`Product not found`, 404));
     }
+    console.log(" if products :>> ", products);
     res
       .status(200)
       .json({ success: true, products, productsCount, resultPerPage });
@@ -88,6 +91,7 @@ exports.getAllProducts = tryCatchAsyncError(async (req, res, next) => {
     if (!products) {
       return next(new ErrorHandler(`Product not found`, 404));
     }
+    console.log("else products :>> ", products);
     res
       .status(200)
       .json({ success: true, products, productsCount, resultPerPage });

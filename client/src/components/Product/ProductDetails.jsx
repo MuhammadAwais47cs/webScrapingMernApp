@@ -42,7 +42,7 @@ function ProductDetails() {
     if (!products?.name) {
       let proName = product?.name;
       console.log("products.lenght in  < 1 :>> ", proName, product?.name);
-      dispatch(getProduct("", "", "", "", "", proName));
+      dispatch(getProduct(proName, "", "", "", "", ""));
     }
   }, [dispatch, id, product.name, error, alert]);
 

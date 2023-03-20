@@ -74,8 +74,7 @@ export const register =
         { name, email, password },
         config
       );
-
-      dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
+      dispatch({ type: REGISTER_USER_SUCCESS, payload: data });
     } catch (error) {
       dispatch({
         type: REGISTER_USER_FAIL,

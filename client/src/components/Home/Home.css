@@ -157,3 +157,66 @@
       font: 300 1vmax "Roboto";
     }
   }
+
+  /* .carousel-control-prev
+  {
+    position: absolute;
+    top: 25%;
+    left: 88% !important;
+    transform: translateY(-50%);  
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  }
+  .carousel-control-next {
+    position: absolute;
+    top: 75%;
+    transform: translateY(-50%);  
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  }
+  .carousel-control-prev {
+    left: 10px;
+  }
+  .carousel-control-next {
+    right: 10px;
+  }
+  .carousel-control-prev .icon-arrow-up .iconify,
+  .carousel-control-next .icon-arrow-down .iconify {
+    font-size: 24px;
+  } */
+  /* .carousel-control-prev,
+.carousel-control-next {
+  width: 60px;
+  height: 60px;
+  margin: 10px;
+  border: none;
+  border-radius: 50%;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-control-prev .iconify,
+.carousel-control-next .iconify {
+  font-size: 24px;
+  color: #fff;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background-color: #222;
+  cursor: pointer;
+} */

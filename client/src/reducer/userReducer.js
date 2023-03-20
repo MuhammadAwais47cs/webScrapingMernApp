@@ -58,6 +58,7 @@ export const userReducer = (state = { user: {} }, action) => {
         loading: false,
         isAuthenticated: true,
         user: action.payload.user,
+        userName: action.payload.user.name,
         token: action.payload.token,
       };
 

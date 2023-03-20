@@ -43,7 +43,6 @@ function ProductDetails() {
 
   const { loading, error, products, resultPerPage, productsCount } =
     useSelector((state) => state.products);
-  console.log("state, category :>> ", state);
   //  console.log(' useSelector(state=>state.products) :>> ',  useSelector(state=>state.products));
 
   //  const keyword
@@ -52,7 +51,6 @@ function ProductDetails() {
     setCurrentPage(e);
   };
   const priceHandler = (e, newPrice) => {
-    console.log("newPrice :>> ", newPrice);
     setPrice(newPrice);
   };
   useEffect(() => {
@@ -74,15 +72,10 @@ function ProductDetails() {
 
             <div className="products ms-3 ">
               {products &&
-                products.map((product) => (
+                products?.map((product) => (
                   <Product key={product._id} product={product} />
                 ))}
-              {console.log(
-                "products.lenght == 0  :>> ",
-                products,
-                products[0] === undefined,
-                noProduct
-              )}
+
               {products[0] === undefined && (
                 <div className="col-md-6 border rounded-5 shadow py-5 my-5 error-container ">
                   <h2 className="text-center">No Product Found</h2>
@@ -96,19 +89,6 @@ function ProductDetails() {
               )}
             </div>
             <div className="filterBox  ">
-              <label for="customRange2" class="form-label">
-                Price
-              </label>
-              <input
-                type="range"
-                class="form-range"
-                min={0}
-                max={500000}
-                value={price}
-                onChange={priceHandler}
-                id="customRange2"
-              />
-
               <div className="bg-light rounded-3 ps-3 py-2 shadow-sm">
                 <p className="text-danger">Categories</p>
 
@@ -147,7 +127,6 @@ function ProductDetails() {
               </div>
             </div>
 
-            {console.log("products.lenght :>> ", products, products > 0)}
             {resultPerPage < productsCount && products.lenght > 0 && (
               <>
                 <div className="paginationBox">

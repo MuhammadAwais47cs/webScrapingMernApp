@@ -263,6 +263,12 @@ function Header() {
   const searchToggle = () => {
     setOpenModel(!openModel);
   };
+  const handleLogout = () => {
+    localStorage.clear(); // clear the localStorage
+    // perform other logout tasks, such as redirecting to the login page
+    navigate("/");
+    window.location.reload();
+  };
   useEffect(() => {
     // if (cat)   navigate(`/products/${cat}`, { state:  });
   }, [cat]);
@@ -352,7 +358,9 @@ function Header() {
             <NavDropdown.Item eventKey="4.4">Profile</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item eventKey="4.1">{userName}</NavDropdown.Item>
-            <NavDropdown.Item eventKey="4.2">LogOut</NavDropdown.Item>
+            <NavDropdown.Item eventKey="4.2" onClick={handleLogout}>
+              LogOut
+            </NavDropdown.Item>
           </NavDropdown>
         ) : (
           <button className="btn  text-white" type="submit">

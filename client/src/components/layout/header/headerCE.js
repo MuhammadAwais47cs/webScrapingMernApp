@@ -2,11 +2,24 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./header.css";
 import flage from "../../Images/1200px-Flag_of_Pakistan.svg.webp";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 function Header() {
   return (
     <>
-      <div class="top-header">
-        <div class="left">
+      <div class="row pt-2 bg-black">
+        <div class="news-headlines">
+          <div class="news-item">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel
+            nisi vitae sapien ultricies luctus a eget eros. Vivamus volutpat
+          </div>
+        </div>
+        {/**
+      <div class="left">
           <img src={flage} alt="" />
           <select>
             <option class="opt" value="PAK">
@@ -28,59 +41,66 @@ function Header() {
           <a href="#">Cart</a>
           <a href="#">Checkout</a>
         </div>
+     */}
       </div>
-      <div class="main-header-section mt-4 " id="header">
-        <div class="left">
-          <h1>Logo</h1>
-        </div>
-        <div class="center">
-          <form action="#" class="search-product">
-            <input type="Search" name="search" placeholder="Search Products" />
-            <div class="search-icon">
-              <i class="fas fa-search"></i>
-            </div>
-          </form>
-        </div>
-        <div class="right d-flex flex-row-reverse ">
-          <Link to="/login">
-            <button class="sign-btn  ">Sign In</button>
-          </Link>
-        </div>
-      </div>
-      <div class="main-header-section mt-3 shadow" id="header">
-        <div class="left">
-          <h4>All Category</h4>
-        </div>
-        <div class="center">
-          <a href="/">Home</a>
-          <a href="/">Category</a>
-          <div class="dropdown">
-            <Link to="/products" class="latest" onclick="DropDown()">
-              Products <i class="fas fa-angle-down"></i>
-            </Link>
-            <div id="myDropdown" class="dropdown-content">
-              <a href="#">Link1</a>
-              <a href="#">Link2</a>
-              <a href="#">Link3</a>
-              <a href="#">Link4</a>
-            </div>
-          </div>
-          <div class="dropdown">
-            <a href="#" class="latest" onclick="DropDown()">
-              Blog <i class="fas fa-angle-down"></i>
-            </a>
-            <div id="myDropdown" class="dropdown-content">
-              <a href="#">Link1</a>
-              <a href="#">Link2</a>
-              <a href="#">Link3</a>
-              <a href="#">Link4</a>
-            </div>
-          </div>
-          <a href="#">Pages</a>
-          <a href="#">Contact</a>
-        </div>
-        <div class="right"></div>
-      </div>
+      <Navbar bg="light" className="mb-2 shadow" expand="md">
+        <Container fluid>
+          <Navbar.Brand>
+            {" "}
+            <h2>Logo</h2>{" "}
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
+            <Nav
+              className="me-auto my-2 my-lg-0"
+              style={{ maxHeight: "100px" }}
+              navbarScroll
+            ></Nav>
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="me-2 rounded-5"
+                aria-label="Search"
+              />
+              <Button variant="outline-success rounded-pill">Search</Button>
+            </Form>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+        <Container fluid>
+          <Navbar.Brand href="#home">
+            <h2>All category</h2>{" "}
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="#features">Features</Nav.Link>
+              <Nav.Link href="#pricing">Pricing</Nav.Link>
+              <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">
+                  Another action
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">
+                  Something
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">
+                  Separated link
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+            <Nav>
+              <Nav.Link href="#deets">More deets</Nav.Link>
+              <Nav.Link eventKey={2} href="#memes">
+                Dank memes
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     </>
   );
 }

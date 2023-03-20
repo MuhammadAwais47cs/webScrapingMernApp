@@ -31,7 +31,7 @@ export const getProduct =
         link = `${baseurl}/api/v1/products?keyword=${keyword}&page=${currentPage}&category=${state?.category}`;
       }
       if (proName) {
-        link = `${baseurl}/api/v1/products?name=${proName}`;
+        link = `${baseurl}/api/v1/products?keyword=${keyword}&name=${proName}`;
       }
       if (state?.category) {
         link = `${baseurl}/api/v1/products?keyword=${keyword}&page=${currentPage}&category=${state?.category}`;
