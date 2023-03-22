@@ -16,15 +16,7 @@ import store from "./store";
 import { loadUser } from "./actions/userAction";
 function App() {
   useEffect(() => {
-    // WebFont.load({
-    //   google: {
-    //     families: ["Roboto", "Droid Sans", "Chilanka"],
-    //   },
-    // });
-
     store.dispatch(loadUser());
-
-    // getStripeApiKey();
   }, []);
   return (
     <>
