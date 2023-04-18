@@ -4,6 +4,8 @@ import thunk from "redux-thunk";
 import {
   productDetailsReducer,
   productReducer,
+  cre,
+  newProductReducer,
 } from "./reducer/productReducer";
 import {
   allUsersReducer,
@@ -15,6 +17,7 @@ import {
 const reducer = combineReducers({
   products: productReducer,
   productDetails: productDetailsReducer,
+  newProduct: newProductReducer,
   user: userReducer,
 });
 let initialState = {};

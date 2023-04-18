@@ -110,7 +110,7 @@ function ProductDetails() {
               </span>
             </div>
 
-            <table class="table">
+            <table className="table">
               <thead>
                 <tr>
                   <th scope="col">#</th>

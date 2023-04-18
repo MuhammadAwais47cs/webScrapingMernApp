@@ -10,6 +10,7 @@ import AboutUs from "./components/AboutUs/AboutUs.jsx";
 import Privacy from "./components/Privacy/Privacy.jsx";
 import ProductDetails from "./components/Product/ProductDetails";
 import Products from "./components/Product/Products.jsx";
+import AddStore from "./components/Admin/AddStore.js";
 import Search from "./components/layout/search/Search";
 import LoginSignUp from "./components/User/LoginSignUp";
 import store from "./store";
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/Privacy" element={<Privacy />} />
           <Route exact path="/search" element={<Search />} />
           <Route exact path="/login" element={<LoginSignUp />} />
+          <Route exact path="/AddStore" element={<AddStore />} />
         </Routes>
         <Features />
         <Footer />

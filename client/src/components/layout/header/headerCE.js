@@ -11,30 +11,30 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 function Header() {
   return (
     <>
-      <div class="row pt-2 bg-black">
-        <div class="news-headlines">
-          <div class="news-item">
+      <div className="row pt-2 bg-black">
+        <div className="news-headlines">
+          <div className="news-item">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel
             nisi vitae sapien ultricies luctus a eget eros. Vivamus volutpat
           </div>
         </div>
         {/**
-      <div class="left">
+      <div className="left">
           <img src={flage} alt="" />
           <select>
-            <option class="opt" value="PAK">
+            <option className="opt" value="PAK">
               PAK
             </option>
-            <option class="opt" value="USA">
+            <option className="opt" value="USA">
               USA
             </option>
-            <option class="opt" value="IND">
+            <option className="opt" value="IND">
               IND
             </option>
           </select>
           <p>+777777646734</p>
         </div>
-        <div class="right">
+        <div className="right">
           <a href="#">My Account</a>
           <a href="#">Wish List</a>
           <a href="#">Shopping</a>

@@ -6,8 +6,8 @@ import "./Home.css";
 import MetaData from "../layout/MetaData.js";
 import { useSelector, useDispatch } from "react-redux";
 import { getProduct } from "../../actions/productAction.js";
-import banner1 from "./Asset/banner1.png";
-import banner2 from "./Asset/banner2.png";
+import banner1 from "./Asset/nike.png";
+import banner2 from "./Asset/adidas.png";
 import banner3 from "./Asset/banner3.png";
 function Home() {
   const navigate = useNavigate();
@@ -84,66 +84,60 @@ function Home() {
       ) : (
         <>
           <MetaData title={"Ecommerce"} />
-          <div className="banner">
-            <div id="carouselExample" className="carousel slide pointer-event">
-              <div className="carousel-inner">
-                <div className="carousel-item active">
-                  {/*  <img src='https://images.priceoye.pk/pakistan-priceoye-slider-hwg39.jpg' width="1600px"/>  */}
-                  <img src={banner1} />
-                </div>
+          <div className="container-fluid mt-5 mx-md-5 ">
+            <div className="d-flex flex-row pt-5 px-md-5">
+              <div className="col-xl-8 col-lg-12">
+                <div
+                  id="carouselExample"
+                  className="carousel slide pointer-event"
+                >
+                  <div className="carousel-inner">
+                    <div className="carousel-item active">
+                      {/*  <img src='https://images.priceoye.pk/pakistan-priceoye-slider-hwg39.jpg' width="1600px"/>  */}
+                      <img src={banner1} />
+                    </div>
 
-                <div className="carousel-item">
-                  <img src={banner2} />
-                </div>
-                <div className="carousel-item">
-                  <img src={banner3} />
+                    <div className="carousel-item">
+                      <img src={banner2} />
+                    </div>
+                    <div className="carousel-item">
+                      <img src={banner3} />
+                    </div>
+                  </div>
+                  <button
+                    className="carousel-control-prev "
+                    type="button"
+                    data-bs-target="#carouselExample"
+                    data-bs-slide="prev"
+                  >
+                    <span
+                      className="carousel-control-prev-icon bg-dark"
+                      aria-hidden="true"
+                    ></span>
+                    <span className="visually-hidden">Previous</span>
+                  </button>
+                  <button
+                    className="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselExample"
+                    data-bs-slide="next"
+                  >
+                    <span
+                      className="carousel-control-next-icon bg-dark"
+                      aria-hidden="true"
+                    ></span>
+                    <span className="visually-hidden">Next</span>
+                  </button>
                 </div>
               </div>
-              <button
-                className="carousel-control-prev "
-                type="button"
-                data-bs-target="#carouselExample"
-                data-bs-slide="prev"
-              >
-                <span
-                  className="carousel-control-prev-icon bg-dark"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExample"
-                data-bs-slide="next"
-              >
-                <span
-                  className="carousel-control-next-icon bg-dark"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Next</span>
-              </button>
+              <div className="col-xl-4 col-lg-0"></div>
             </div>
           </div>
-          <div className="categoryBar d-flex flex-row justify-content-center my-3">
-            {catgory.map(({ name, category, url, height }) => (
-              <div
-                className="category-link d-flex flex-column  mx-2"
-                key={category}
-                onClick={() => navigate(`/products`, { state: { category } })}
-              >
-                <div className="categoryImg my-4 mx-auto">
-                  <img src={url} height={height} alt="" />
-                </div>
 
-                <span className="text-center">{name}</span>
-              </div>
-            ))}
-          </div>
-          <a href="#container">
-            <h2 className="homeHeading ">Featured Products</h2>
-          </a>
           <div id="container">
+            <h2 className="container">
+              Double Cash Back Hot Stores | April 2023
+            </h2>
             <div className="container">
               {products &&
                 products.map((product) => (

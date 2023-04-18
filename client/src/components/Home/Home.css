@@ -13,7 +13,9 @@
     color: white;
   }
   .carousel-item > img {
-    width: 98vmax;
+    width: 75vmax;
+    height: 35vmin;
+
   }
   .banner > h1 {
     margin: 5vmax;
@@ -76,18 +78,23 @@
   }
   
   .productCard {
-    width: 14vmax;
+    width: 13vmax;
     display: flex;
     flex-direction: column;
+    align-items: center;
     text-decoration: none;
     color: rgb(48, 48, 48);
-    margin: 2vmax;
+    margin: 1vmax;
+    padding: 1vmax;
     transition: all 0.5s;
     padding-bottom: 0.5vmax;
+    border: #ffffff 0px solid;
+    border-radius: 3%;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
   }
   
   .productCard > img {
-    width: 14vmax;
+    width: 6vmax;
   }
   .category-link > span {
        font-size: 1.2vmax;
@@ -129,7 +136,7 @@
    
   @media screen and (max-width: 600px) {
     .carousel-item > img {
-      width: 65vmax;
+      width: 42vmax;
     }
     .productCard > p {
       font-size: 1.7vmax;
