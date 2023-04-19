@@ -2,7 +2,7 @@ const port = 8000;
 const express = require("express");
 const cheerio = require("cheerio");
 const axios = require("axios");
-
+const { arrayOfStores } = require("./data");
 const app = express();
 const arryOfUrl = [
   // 'Mobiles/nokia',
@@ -23,6 +23,7 @@ const arryOfUrl = [
   // 'tv-home-appliances',
   "Motorcycle",
 ];
+console.log(" arrayOfStores :>> ", arrayOfStores);
 const productsLinks = [];
 const products = [];
 const postProduct = async (product) => {
@@ -129,6 +130,8 @@ const getProductsData = async (productsLinks) => {
       .catch((err) => console.error(err));
   });
 };
+arrayOfStores;
+
 arryOfUrl.map(async (category) => {
   // console.log('`https://priceoye.pk` :>> ', `https://priceoye.pk/${url}`);
   // await axios(`https://priceoye.pk/${category}`)  // priceoye.pk
@@ -152,6 +155,7 @@ arryOfUrl.map(async (category) => {
         productsLinks.push({ url, imgUrl, category });
       });
 
+      return;
       console.log("productsLinks in  :>> ", productsLinks);
       await getProductsData(productsLinks);
     })
