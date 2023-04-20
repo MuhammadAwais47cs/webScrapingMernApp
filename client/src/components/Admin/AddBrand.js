@@ -13,6 +13,7 @@ import MetaData from "../layout/MetaData";
 // import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 // import SideBar from "./Sidebar";
 import { NEW_PRODUCT_RESET } from "../../constant/productConstant";
+import { addBrandCheckBox, addBrandFields, checkBox } from "./data";
 
 const NewProduct = ({ history }) => {
   const dispatch = useDispatch();
@@ -98,32 +99,33 @@ const NewProduct = ({ history }) => {
             encType="multipart/form-data"
             onSubmit={createProductSubmitHandler}
           >
-            <h1>Add Store</h1>
-
-            <div>
-              <FaSpellCheck />
-              <input
-                type="text"
-                placeholder="Store Name"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-
-            <div>
-              <textarea
-                placeholder="Product Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                cols="30"
-                rows="1"
-              ></textarea>
-            </div>
+            <h1>Add Brand</h1>
+            {addBrandFields.map(({ label, type, id, name, className }) => (
+              <div className={``}>
+                <input
+                  placeholder={label}
+                  type={type}
+                  id={id}
+                  name={name}
+                  required
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+            ))}
 
             <div>
               <select onChange={(e) => setCategory(e.target.value)}>
-                <option value="">Choose Category</option>
+                <option value=""> Related Brand</option>
+                {categories.map((cate) => (
+                  <option key={cate} value={cate}>
+                    {cate}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <select onChange={(e) => setCategory(e.target.value)}>
+                <option value=""> languages</option>
                 {categories.map((cate) => (
                   <option key={cate} value={cate}>
                     {cate}
@@ -132,18 +134,10 @@ const NewProduct = ({ history }) => {
               </select>
             </div>
 
-            <div>
-              <input
-                type="text"
-                placeholder="Store link"
-                required
-                onChange={(e) => setStock(e.target.value)}
-              />
-            </div>
-
             <div id="createProductFormFile">
               <input
                 type="file"
+                placeholder="Add Images"
                 name="avatar"
                 accept="image/*"
                 onChange={createProductImagesChange}
@@ -154,6 +148,18 @@ const NewProduct = ({ history }) => {
             <div id="createProductFormImage">
               {imagesPreview.map((image, index) => (
                 <img key={index} src={image} alt="Product Preview" />
+              ))}
+            </div>
+            <div className="d-flex   mt-3 pt-1">
+              {addBrandCheckBox.map((inputField, index) => (
+                <div className="d-flex  mx-4 w-50" key={index}>
+                  <input
+                    type="checkbox"
+                    name="types"
+                    value={inputField.label}
+                  />
+                  <label className=" font-bold mx-2">{inputField.label}</label>
+                </div>
               ))}
             </div>
 

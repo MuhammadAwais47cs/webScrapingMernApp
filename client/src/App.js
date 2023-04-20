@@ -10,7 +10,8 @@ import AboutUs from "./components/AboutUs/AboutUs.jsx";
 import Privacy from "./components/Privacy/Privacy.jsx";
 import ProductDetails from "./components/Product/ProductDetails";
 import Products from "./components/Product/Products.jsx";
-import AddStore from "./components/Admin/AddStore.js";
+import AddBrand from "./components/Admin/AddBrand";
+import AddProduct from "./components/Admin/AddProduct";
 import Search from "./components/layout/search/Search";
 import LoginSignUp from "./components/User/LoginSignUp";
 import store from "./store";
@@ -33,7 +34,8 @@ function App() {
           <Route exact path="/Privacy" element={<Privacy />} />
           <Route exact path="/search" element={<Search />} />
           <Route exact path="/login" element={<LoginSignUp />} />
-          <Route exact path="/AddStore" element={<AddStore />} />
+          <Route exact path="/addBrand" element={<AddBrand />} />
+          <Route exact path="/addProduct" element={<AddProduct />} />
         </Routes>
         <Features />
         <Footer />
