@@ -23,7 +23,6 @@ const arryOfUrl = [
   // 'tv-home-appliances',
   "Motorcycle",
 ];
-console.log(" arrayOfStores :>> ", arrayOfStores);
 const productsLinks = [];
 const products = [];
 const postProduct = async (product) => {
@@ -50,115 +49,99 @@ const postProduct = async (product) => {
 //   });
 
 const getProductsData = async (productsLinks) => {
-  productsLinks.map(async ({ url, imgUrl }) => {
-    // console.log('productsLinks :>> ',url);
-    return;
-    await axios(url)
-      .then(async (response) => {
-        const html = response.data;
-        const $ = cheerio.load(html);
-        const productUrl = url;
-        // console.log("$ :>> ", html);
-
-        // $('#product-main', html).each(function() {
-        // $("#pro-detail-box", html).each(function () {
-        $("#prodcut-desc", html).each(function () {
-          // $(".column.main", html).each(function () {
-          //  const images = $('.product-image-main').find('amp-img').attr('src');
-          //  const name = 'IPHONE 14 PRO MAX' // 4 ishoping
-          const name = $(".col-md-7.col-sm-12.col-xs-12.pad0.mgrmin10")
-            .find("h1")
-            .find("span")
-            .text();
-          const brand = $(".detlist1").find("a").find("span").text();
-          const description = name; // 4 ishoping
-          // const name = $(".page-title").find("span").text();
-          // const description = $(".product-name").find("h1").text(); // 4 ishoping
-          const store = "homeshopping.pk";
-          const Availability = $(".in_stock").text()?.trim();
-          const price = $(".ActualPrice")
-            .text()
-            .split("Rs ")[1]
-            ?.replace(".00", "")
-            .trim();
-          // const price = $(".price")
-          //   .text()
-          //   .split("Rs ")[1]
-          //   ?.replace(".00", "")
-          //   .trim();
-
-          // const Availability = $(".stock.available").text()?.trim();
-          // const store = "Shophive.com";
-          // const brand = $(".brand-link ").attr("title");
-          const category = "Mobiles";
-          const rating = $(".rating-points").text();
-          const ramRom = $(".ga-dataset.active").find("span").text();
-          //  const brand = $('.brand a').find('span').text();
-          //  const name = $('.product-title').find('h3').text();
-          // const store = 'PriceOye'
-          //  const brand = $('.breadcrumb a').eq(1).text();
-          //  const Availability = $('.summary-price.text-black.bold.stock-status').text()?.trim();
-          //  const price = $('.summary-price.text-black.price-size-lg').text().split('Rs.')[1]?.trim();
-          //  const category = 'Mobiles-Accessories'
-          //  const url = $('#product-summary').find('a').attr('href')
-          //  console.log('price:>>' , price);
-          //  console.log('brand:>>' , brand);
-          // console.log("ProductTitle :>>", brand);
-          //  console.log('Availability :>> ', Availability);
-          //  console.log('ramRom :>> ', ramRom);
-          //  console.log('url :>> ', url);
+  productsLinks.map(
+    async ({ url, routes, imgUrl, storeName, category, detailBoxClasses }) => {
+      // console.log("productsLinks :>> ", url, imgUrl, category);
+      await axios(url)
+        .then(async (response) => {
+          const html = response.data;
+          const $ = cheerio.load(html);
+          // const { proDetailBox, name, rating, stock, price } = detailBoxClasses;
+          const productUrl = url;
+          // console.log("$ :>> ", $("#product-summary", html));
           // return;
-          products.push({
-            price,
-            Availability,
-            name,
-            description: name,
-            brand,
-            productUrl,
-            imgUrl,
-            store,
-            category,
-            rating,
+          $(".title.page-title", html)?.each(function () {
+            // console.log(" :>> ");
+            // $("#product-section", html)?.each(function () {
+            // $(proDetailBox, html).each(function () {
+            const name = $(".title.page-title").find("span").text();
+            // const store = storeName;
+            // const Availability = $(stock).text()?.trim();
+            // const price = $(price)
+            // .text()
+            // .split("Rs ")[1]
+            // ?.replace(".00", "")
+            // .trim();
+
+            // const brand = routes.split("/");
+            // const rating = $(rating).text();
+            console.log("products :>> ", name);
+
+            return;
+
+            products.push({
+              price,
+              Availability,
+              name,
+              description: name,
+              brand,
+              productUrl,
+              imgUrl,
+              store,
+              category,
+              rating,
+            });
+
+            // products.push({price,Availability,name ,description, brand ,productUrl,imgUrl ,store, category , rating})
+            console.log("products :>> ", products);
+            return;
+            postProduct(products);
+          });
+        })
+        .catch((err) => console.error(err));
+    }
+  );
+};
+arrayOfStores.map(
+  async ({
+    storeName,
+    mainContainer,
+    arrayOfRoutes,
+    imgTag,
+    detailBoxClasses,
+  }) => {
+    arrayOfRoutes.map(async ({ category, routes }) => {
+      console.log(
+        "https://${storeName}/${routes} :>> ",
+        `https://${storeName}/${routes}`
+      );
+      await axios(`https://${storeName}/${routes}`)
+        .then(async (response) => {
+          const html = response.data;
+          const $ = cheerio.load(html);
+          // console.log("object :>> ", cheerio.load(html));
+          $(mainContainer, html).each(function () {
+            const url = $(".product-img")?.attr("href");
+            // const url = $(this)?.find("a")?.attr("href");
+            // ?.find("a")
+            const imgUrl = $(this).find(imgTag).attr("src"); // 4 ishoping
+            productsLinks.push({
+              url,
+              routes,
+              imgUrl,
+              storeName,
+              category,
+              detailBoxClasses,
+            });
           });
 
-          // products.push({price,Availability,name ,description, brand ,productUrl,imgUrl ,store, category , rating})
-          // console.log("products :>> ", products);
+          // console.log("productsLinks in  :>> ", productsLinks);
           // return;
-          postProduct(products);
-        });
-      })
-      .catch((err) => console.error(err));
-  });
-};
-arrayOfStores;
+          await getProductsData(productsLinks);
+        })
+        .catch((err) => console.error(err));
+    });
+  }
+);
 
-arryOfUrl.map(async (category) => {
-  // console.log('`https://priceoye.pk` :>> ', `https://priceoye.pk/${url}`);
-  // await axios(`https://priceoye.pk/${category}`)  // priceoye.pk
-  await axios(
-    `https://homeshopping.pk/categories/Oppo-Mobile-Prices-In-Pakistan/`
-  ) // homeshopping.pk
-    // await axios(`https://www.shophive.com/laptops-computers/laptops/lenovo`)
-    // await axios(`https://www.ishopping.pk/electronics/mobile-phones-tablet-pc/mobile-phones-prices-in-pakistan/apple-iphone/iphone-14-pro-max.html`)
-    .then(async (response) => {
-      const html = response.data;
-      const $ = cheerio.load(html);
-      // console.log('html :>> ', html);
-      // console.log('cheerio.load(html) :>> ',   $('.inner-grid',html));
-      // return
-      // $('.productBox.b-productBox', html).each(function() {
-      $(".innerp.product-box", html).each(function () {
-        const url = $(this).find("a").attr("href");
-        const name = $(".ProductDetails").find("a").text();
-        //  const imgUrl = $(this).find('amp-img').attr('src')
-        const imgUrl = $(this).find("img").attr("src"); // 4 ishoping
-        productsLinks.push({ url, imgUrl, category });
-      });
-
-      return;
-      console.log("productsLinks in  :>> ", productsLinks);
-      await getProductsData(productsLinks);
-    })
-    .catch((err) => console.error(err));
-});
 app.listen(port, () => console.log("listening on port " + port));
