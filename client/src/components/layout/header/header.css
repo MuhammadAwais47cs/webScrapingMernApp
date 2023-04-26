@@ -218,3 +218,6 @@ body {
 }
 
 /*-------------------- main header section end----------------- */
+.dropdown-item{
+  width: 94%;
+}

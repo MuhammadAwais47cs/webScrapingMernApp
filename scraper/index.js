@@ -4,32 +4,13 @@ const cheerio = require("cheerio");
 const axios = require("axios");
 const { arrayOfStores } = require("./data");
 const app = express();
-const arryOfUrl = [
-  // 'Mobiles/nokia',
-  // 'led-tv',
-  // 'ac',
-  // 'Smart-Watches/samsung',
-  // 'Wireless-Earbuds/anker',
-  // 'Bluetooth-Speakers',
-  // 'chargingCables',
-  // 'Laptops',
-  // 'Tablets',
-  // 'Mobiles',
-  // 'Tablets',
-  // 'Smart Watches',
-  // 'Wireless Earbuds',
-  // 'Mobiles Accessories',
-  // 'Laptops',
-  // 'tv-home-appliances',
-  "Motorcycle",
-];
 const productsLinks = [];
 const products = [];
 const postProduct = async (product) => {
   console.log("product.lenght() :>> ", product);
-  //  return
+  // return;
   await product.map((product, index) => {
-    console.log("product :>> ", product.productUrl);
+    // console.log("product :>> ", product);
     // console.log('index :>> ', index );
     // return;
     axios
@@ -50,32 +31,46 @@ const postProduct = async (product) => {
 
 const getProductsData = async (productsLinks) => {
   productsLinks.map(
-    async ({ url, routes, imgUrl, storeName, category, detailBoxClasses }) => {
+    async ({
+      url,
+      routes,
+      price,
+      imgUrl,
+      storeName,
+      category,
+      stock,
+      detailBoxClasses,
+    }) => {
       // console.log("productsLinks :>> ", url, imgUrl, category);
       await axios(url)
         .then(async (response) => {
           const html = response.data;
+          // console.log("$ :>> ", html);
           const $ = cheerio.load(html);
           // const { proDetailBox, name, rating, stock, price } = detailBoxClasses;
           const productUrl = url;
-          // console.log("$ :>> ", $("#product-summary", html));
           // return;
-          $(".title.page-title", html)?.each(function () {
-            // console.log(" :>> ");
+          // const store = storeName;
+          // const name = $(".product-title", html).find("h2").text();
+          $("#product-main.row.card", html).each(function () {
+            console.log(" :>> ");
+            return;
             // $("#product-section", html)?.each(function () {
             // $(proDetailBox, html).each(function () {
-            const name = $(".title.page-title").find("span").text();
-            // const store = storeName;
-            // const Availability = $(stock).text()?.trim();
-            // const price = $(price)
-            // .text()
-            // .split("Rs ")[1]
-            // ?.replace(".00", "")
-            // .trim();
+            // const Availability = $("#button-cart").text()?.trim();
+            // const price = $(".price-group")
+            //   .find("div")
+            //   .text()
+            //   .split("Rs ")[1]
+            //   ?.replace(".00", "")
+            //   .trim();
 
-            // const brand = routes.split("/");
+            const brand = $(".brand-image.product-manufacturer")
+              .find("a")
+              .find("span")
+              .text();
             // const rating = $(rating).text();
-            console.log("products :>> ", name);
+            console.log("products :>> ", name, price, Availability, brand);
 
             return;
 
@@ -106,38 +101,143 @@ arrayOfStores.map(
   async ({
     storeName,
     mainContainer,
+    DeliveryCharges,
     arrayOfRoutes,
     imgTag,
     detailBoxClasses,
   }) => {
-    arrayOfRoutes.map(async ({ category, routes }) => {
+    arrayOfRoutes.map(async ({ category, routes, brand }) => {
       console.log(
         "https://${storeName}/${routes} :>> ",
         `https://${storeName}/${routes}`
       );
-      await axios(`https://${storeName}/${routes}`)
+      await axios(`http://${storeName}/${routes}`)
         .then(async (response) => {
           const html = response.data;
           const $ = cheerio.load(html);
-          // console.log("object :>> ", cheerio.load(html));
-          $(mainContainer, html).each(function () {
-            const url = $(".product-img")?.attr("href");
-            // const url = $(this)?.find("a")?.attr("href");
-            // ?.find("a")
-            const imgUrl = $(this).find(imgTag).attr("src"); // 4 ishoping
-            productsLinks.push({
-              url,
-              routes,
-              imgUrl,
-              storeName,
-              category,
-              detailBoxClasses,
-            });
-          });
-
-          // console.log("productsLinks in  :>> ", productsLinks);
+          // console.log("object :>> ", html);
           // return;
-          await getProductsData(productsLinks);
+          if (storeName === "qmart.pk") {
+            $(".product-layout", html).each(function () {
+              const productUrl = $(this).find(".product-img").attr("href");
+              const name = $(this).find(".name").find("a").text(); //.split("GB")[0];
+              const price = $(this)
+                .find(".price-normal")
+                .text()
+                .split("Rs.")[1];
+              const imgUrl = $(this).find(imgTag).attr("src");
+              const stock = $(this).find(".btn-cart").find("span").text(); //.split("rt")[1];
+              stock === "Add to Cart" &&
+                productsLinks.push({
+                  name,
+                  description: name,
+                  category,
+                  stock: "Available",
+                  productUrl,
+                  store: storeName,
+                  brand,
+                  imgUrl,
+                  price,
+                  DeliveryCharges,
+                  // routes,
+                  // detailBoxClasses,
+                });
+            });
+            const key = "name";
+            const products = [
+              ...new Map(
+                productsLinks?.map((item) => [item[key], item])
+              ).values(),
+            ];
+            console.log("productsLinks in  :>> ", products);
+            // console.log("productsLinks in  :>> ", productsLinks);
+            return;
+            await getProductsData(productsLinks);
+          } else if (storeName === "priceoye.pk") {
+            $(".productBox.b-productBox", html).each(function () {
+              const productUrl = $(this).find("a").attr("href");
+              const name = $(this)
+                .find(".p-title.bold.h5")
+                .text()
+                .split("\n")[1]
+                .trim();
+              const ribbon = $(this).find("mark").text();
+              const price = $(this)
+                .find(".price-box.p1")
+                .text()
+                .split("Rs.")[1]
+                .trim();
+              const imgUrl = $(this).find("amp-img").attr("src");
+              const stock = $(".btn-cart").find("span").text().split("rt")[1];
+              ribbon === "" &&
+                productsLinks.push({
+                  name,
+                  // description: name,
+                  category,
+                  // ribbon,
+                  stock: "Available",
+                  url: productUrl,
+                  store: storeName,
+                  brand:
+                    routes.split("/")[1].charAt(0).toUpperCase() +
+                    routes.split("/")[1].slice(1),
+                  imgUrl,
+                  price,
+                  DeliveryCharges,
+                  // routes,
+                  // detailBoxClasses,
+                });
+            });
+            const key = "url";
+            const products = [
+              ...new Map(
+                productsLinks?.map((item) => [item[key], item])
+              ).values(),
+            ];
+            console.log("productsLinks in  :>> ", products);
+            // console.log("productsLinks in  :>> ", productsLinks);
+            return;
+            await getProductsData(products);
+          } else if (storeName === "mobile-phone.pk") {
+            $(".home_page_blocks", html).each(function () {
+              // console.log("object :>> ");
+              // return;
+              const productUrl = $(this).find("a").attr("href");
+              const name = $(this).find(".block_link").text();
+
+              const price = $(this).find("span").text().split("Rs.")[1];
+              const imgUrl = $(this).find("img").attr("src");
+              // const stock = $(".btn-cart").find("span").text().split("rt")[1];
+              // ribbon === "" &&
+              productsLinks.push({
+                name,
+                description: name,
+                category,
+                // ribbon,
+                stock: "Available",
+                productUrl: "http://www.mobile-phone.pk" + productUrl,
+                store: storeName,
+                brand,
+                imgUrl,
+                price,
+                DeliveryCharges,
+                // routes,
+                // detailBoxClasses,
+              });
+            });
+            const key = "name";
+            const products = [
+              ...new Map(
+                productsLinks?.map((item) => [item[key], item])
+              ).values(),
+            ];
+            // console.log("productsLinks in  :>> ", products);
+            // console.log("productsLinks in  :>> ", productsLinks);
+            postProduct(products);
+            return;
+
+            await getProductsData(products);
+          }
         })
         .catch((err) => console.error(err));
     });

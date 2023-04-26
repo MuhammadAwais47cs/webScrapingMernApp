@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Search from "../search/Search";
 import Button from "react-bootstrap/Button";
 import Collapse from "react-bootstrap/Collapse";
+import "./header.css";
 let bootstrap;
 const tooltipTriggerList = document.querySelectorAll(
   '[data-bs-toggle="tooltip"]'
