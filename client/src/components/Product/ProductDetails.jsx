@@ -42,7 +42,7 @@ function ProductDetails() {
     if (!products?.name) {
       let proName = product?.name;
       console.log("products.lenght in  < 1 :>> ", proName, product?.name);
-      dispatch(getProduct(proName, "", "", "", "", ""));
+      dispatch(getProduct(proName));
     }
   }, [dispatch, id, product.name, error, alert]);
 
@@ -117,6 +117,7 @@ function ProductDetails() {
                   <th scope="col">Store</th>
                   <th scope="col">Stock</th>
                   <th scope="col">Price</th>
+                  <th scope="col">DeliveryCharges </th>
                   <th scope="col">Rating </th>
                 </tr>
               </thead>
@@ -130,6 +131,7 @@ function ProductDetails() {
                       <td>{product.store}</td>
                       <td>{product?.stock}</td>
                       <td>Rs : {product.price}</td>
+                      <td>Rs : {product?.DeliveryCharges}</td>
                       <td>{product?.rating}</td>
                       <td>
                         <button
@@ -146,8 +148,9 @@ function ProductDetails() {
                   <tr>
                     <th scope="row">1</th>
                     <td>{product.store}</td>
-                    <td>{product?.Stock}</td>
+                    <td>{product?.stock}</td>
                     <td>Rs : {product.price}</td>
+                    <td>Rs : {product?.DeliveryCharges}</td>
                     <td>{product?.rating}</td>
                     <td>
                       <button

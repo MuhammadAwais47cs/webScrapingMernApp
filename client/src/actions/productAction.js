@@ -17,7 +17,7 @@ export const getProduct =
   (
     keyword = "",
     currentPage = 1,
-    price = [0, 500000],
+    price = 500000,
     state,
     ratings = 0,
     proName = ""
@@ -25,22 +25,22 @@ export const getProduct =
   async (dispatch) => {
     try {
       dispatch({ type: ALL_PRODUCT_REQUEST });
-      let link = `${baseurl}/api/v1/products?keyword=${keyword}&page=${currentPage}`;
+      let link = `${baseurl}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=1000&price[lte]=${price}`;
 
       //   let link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}`;
       //   let link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
       if (state?.category) {
-        link = `${baseurl}/api/v1/products?keyword=${keyword}&page=${currentPage}&category=${state?.category}`;
+        link = `${baseurl}/api/v1/products?keyword=${keyword}&page=${currentPage}&category=${state?.category}&price[gte]=1000&price[lte]=${price}`;
       }
       if (proName) {
         link = `${baseurl}/api/v1/products?keyword=${keyword}&name=${proName}`;
       }
       if (state?.category) {
-        link = `${baseurl}/api/v1/products?keyword=${keyword}&page=${currentPage}&category=${state?.category}`;
+        link = `${baseurl}/api/v1/products?keyword=${keyword}&page=${currentPage}&category=${state?.category}&price[gte]=1000&price[lte]=${price}`;
       }
       if (state?.brand) {
-        link = `${baseurl}/api/v1/products?keyword=${keyword}&page=${currentPage}&brand=${state?.brand}`;
+        link = `${baseurl}/api/v1/products?keyword=${keyword}&page=${currentPage}&brand=${state?.brand}&price[gte]=1000&price[lte]=${price}`;
       }
 
       const { data } = await axios.get(link);

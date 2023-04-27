@@ -13,6 +13,10 @@ const productSchema = mongoose.Schema({
     type: String,
     required: [true, "Please Enter product Description"],
   },
+  stock: {
+    type: String,
+    required: [true, "Please Enter product Stock"],
+  },
   store: {
     type: String,
     required: [true, "Please Enter product Description"],
@@ -20,6 +24,10 @@ const productSchema = mongoose.Schema({
   brand: {
     type: String,
     required: [true, "Please Enter product Description"],
+  },
+  DeliveryCharges: {
+    type: String,
+    required: [true, "Please Enter product DeliveryCharges"],
   },
 
   imgUrl: {
