@@ -26,7 +26,7 @@ function Header() {
   const [cat, setCat] = useState(false);
   const catogary = [
     {
-      name: "Mobiles",
+      name: "Home",
       value: "Mobiles",
       icon: "cui-dollar",
       children: [
@@ -79,7 +79,7 @@ function Header() {
       ],
     },
     {
-      name: "Tablets",
+      name: "All Store",
       value: "Tablets",
       // icon: "cui-dollar",
       children: [
@@ -107,7 +107,7 @@ function Header() {
       ],
     },
     {
-      name: "Smart Watches",
+      name: "Categories",
       value: "Smart-Watches",
       icon: "cui-dollar",
       children: [
@@ -130,131 +130,6 @@ function Header() {
         {
           name: "Xiaomi",
           url: "/CreateSubsistence",
-          icon: "cui-pencil",
-        },
-      ],
-    },
-    {
-      name: "Wireless Earbuds",
-      value: "Wireless-Earbuds",
-      icon: "cui-dollar",
-      children: [
-        {
-          name: "Apple",
-          url: "/OverviewMoneyOut",
-          icon: "cui-bookmark",
-        },
-        {
-          name: "Realme",
-          url: "/WhatType",
-          icon: "cui-pencil",
-        },
-
-        {
-          name: "Audionic",
-          url: "/Mileage",
-          icon: "cui-pencil",
-        },
-        {
-          name: "Infinix",
-          url: "/CreateSubsistence",
-          icon: "cui-pencil",
-        },
-      ],
-    },
-    {
-      name: "Mobiles Accessories",
-      value: "Mobiles-Accessories",
-      icon: "cui-dollar",
-      children: [
-        {
-          name: "Mobiles Accessories",
-          url: "/OverviewMoneyOut",
-          icon: "cui-bookmark",
-        },
-        {
-          name: "Charging Cables",
-          url: "/WhatType",
-          icon: "cui-pencil",
-        },
-
-        {
-          name: "Wireless Chargers",
-          url: "/Mileage",
-          icon: "cui-pencil",
-        },
-        {
-          name: "Wall Chargers",
-          url: "/CreateSubsistence",
-          icon: "cui-pencil",
-        },
-        {
-          name: "Car Chargers",
-          url: "/CreatePurchaseCreditNote",
-          icon: "cui-credit-card",
-        },
-
-        {
-          name: "Power Banks",
-          url: "/PurchaseRefundOverview",
-          icon: "cui-file",
-        },
-
-        {
-          name: "Bluetooth Speakers",
-          url: "/OverviewInvoice33",
-          icon: "cui-envelope-open",
-          attributes: { disabled: true },
-        },
-      ],
-    },
-    {
-      name: "Laptops",
-      value: "Laptops",
-      icon: "cui-dollar",
-      children: [
-        {
-          name: "Apple",
-          url: "/OverviewMoneyOut",
-          icon: "cui-bookmark",
-        },
-        {
-          name: "Dell",
-          url: "/WhatType",
-          icon: "cui-pencil",
-        },
-
-        {
-          name: "Hp",
-          url: "/Mileage",
-          icon: "cui-pencil",
-        },
-        {
-          name: "Lenovo",
-          url: "/CreateSubsistence",
-          icon: "cui-pencil",
-        },
-      ],
-    },
-    {
-      name: "TV & Home Appliances",
-      value: "TV&Home-Appliances",
-      icon: "cui-dollar",
-      children: [
-        {
-          name: "Led-Tv ",
-          url: "/OverviewMoneyOut",
-          icon: "cui-bookmark",
-        },
-        {
-          name: "AC",
-          url: "/WhatType",
-          icon: "cui-pencil",
-        },
-
-        {
-          name: "Fridge",
-          url: "/Mileage",
           icon: "cui-pencil",
         },
       ],

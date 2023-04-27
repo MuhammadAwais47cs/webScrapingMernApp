@@ -13,9 +13,12 @@
     color: white;
   }
   .carousel-item > img {
-    width: 75vmax;
-    height: 35vmin;
-
+    width: 68vmax;
+    height: 38vmin;
+  }
+  .carousel-item-right > img {
+    width: 19vmax;
+    /* height: 50vmin; */
   }
   .banner > h1 {
     margin: 5vmax;
