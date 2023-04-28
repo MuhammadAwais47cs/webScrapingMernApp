@@ -41,7 +41,8 @@ const getProductsData = async (productsLinks) => {
       stock,
       detailBoxClasses,
     }) => {
-      // console.log("productsLinks :>> ", url, imgUrl, category);
+      // console.log("productsLinks :>> ",  imgUrl, category);
+      // return;
       await axios(url)
         .then(async (response) => {
           const html = response.data;
@@ -52,27 +53,24 @@ const getProductsData = async (productsLinks) => {
           // return;
           // const store = storeName;
           // const name = $(".product-title", html).find("h2").text();
-          $("#product-main.row.card", html).each(function () {
-            console.log(" :>> ");
-            return;
-            // $("#product-section", html)?.each(function () {
-            // $(proDetailBox, html).each(function () {
-            // const Availability = $("#button-cart").text()?.trim();
-            // const price = $(".price-group")
-            //   .find("div")
-            //   .text()
-            //   .split("Rs ")[1]
-            //   ?.replace(".00", "")
-            //   .trim();
-
-            const brand = $(".brand-image.product-manufacturer")
-              .find("a")
+          $("#prodcut-desc", html).each(function () {
+            const name = $(".col-md-7.col-sm-12.col-xs-12.pad0.mgrmin10")
+              .find("h1")
               .find("span")
               .text();
-            // const rating = $(rating).text();
-            console.log("products :>> ", name, price, Availability, brand);
+            const brand = $(".detlist1").find("a").find("span").text();
+            const description = name; // 4 ishoping
+            const store = "homeshopping.pk";
+            const Availability = $(".in_stock").text()?.trim();
+            const price = $(".ActualPrice")
+              .text()
+              .split("Rs ")[1]
+              ?.replace(".00", "")
+              .trim();
 
-            return;
+            const category = "Mobiles";
+            const rating = $(".rating-points").text();
+            const ramRom = $(".ga-dataset.active").find("span").text();
 
             products.push({
               price,
@@ -86,8 +84,6 @@ const getProductsData = async (productsLinks) => {
               category,
               rating,
             });
-
-            // products.push({price,Availability,name ,description, brand ,productUrl,imgUrl ,store, category , rating})
             console.log("products :>> ", products);
             return;
             postProduct(products);
@@ -111,12 +107,12 @@ arrayOfStores.map(
         "https://${storeName}/${routes} :>> ",
         `https://${storeName}/${routes}`
       );
-      await axios(`http://${storeName}/${routes}`)
+      // return;
+      await axios(`https://${storeName}/${routes}`)
         .then(async (response) => {
           const html = response.data;
           const $ = cheerio.load(html);
           // console.log("object :>> ", html);
-          // return;
           if (storeName === "qmart.pk") {
             $(".product-layout", html).each(function () {
               const productUrl = $(this).find(".product-img").attr("href");
@@ -233,10 +229,53 @@ arrayOfStores.map(
             ];
             // console.log("productsLinks in  :>> ", products);
             // console.log("productsLinks in  :>> ", productsLinks);
-            postProduct(products);
             return;
+            postProduct(products);
 
             await getProductsData(products);
+          } else if (storeName === "homeshopping.pk") {
+            $(".innerp.product-box", html).each(function () {
+              // console.log("object :>> ");
+              // return;
+              const productUrl = $(this).find("a").attr("href");
+              const name = $(this).find(".ProductDetails").find("a").text();
+
+              const price = $(this)
+                .find(".col-md-12.col-xs-12.p0")
+                .find("a")
+                .find("div")
+                .text()
+                .split("Rs.")[1];
+              const imgUrl = $(this).find("img").attr("src");
+              // const stock = $(".btn-cart").find("span").text().split("rt")[1];
+              // ribbon === "" &&
+              productsLinks.push({
+                name,
+                description: name,
+                category,
+                // ribbon,
+                stock: "Available",
+                url: productUrl,
+                store: storeName,
+                brand,
+                imgUrl,
+                price,
+                DeliveryCharges,
+                // routes,
+                // detailBoxClasses,
+              });
+            });
+            const key = "name";
+            const products = [
+              ...new Map(
+                productsLinks?.map((item) => [item[key], item])
+              ).values(),
+            ];
+            // console.log("productsLinks in  :>> ", products);
+            // console.log("productsLinks in  :>> ", productsLinks);
+            await getProductsData(products);
+            return;
+            postProduct(products);
           }
         })
         .catch((err) => console.error(err));
