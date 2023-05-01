@@ -7,10 +7,9 @@ const app = express();
 const productsLinks = [];
 const products = [];
 const postProduct = async (product) => {
-  console.log("product.lenght() :>> ", product);
-  // return;
+  return;
   await product.map((product, index) => {
-    // console.log("product :>> ", product);
+    console.log("product :>> ", product);
     // console.log('index :>> ', index );
     // return;
     axios
@@ -32,16 +31,17 @@ const postProduct = async (product) => {
 const getProductsData = async (productsLinks) => {
   productsLinks.map(
     async ({
+      brand,
       url,
-      routes,
-      price,
+      name,
       imgUrl,
-      storeName,
+      DeliveryCharges,
+      store,
       category,
       stock,
       detailBoxClasses,
     }) => {
-      // console.log("productsLinks :>> ",  imgUrl, category);
+      // console.log("productsLinks :>> ", url, imgUrl, store, category);
       // return;
       await axios(url)
         .then(async (response) => {
@@ -53,41 +53,77 @@ const getProductsData = async (productsLinks) => {
           // return;
           // const store = storeName;
           // const name = $(".product-title", html).find("h2").text();
-          $("#prodcut-desc", html).each(function () {
-            const name = $(".col-md-7.col-sm-12.col-xs-12.pad0.mgrmin10")
-              .find("h1")
-              .find("span")
-              .text();
-            const brand = $(".detlist1").find("a").find("span").text();
-            const description = name; // 4 ishoping
-            const store = "homeshopping.pk";
-            const Availability = $(".in_stock").text()?.trim();
-            const price = $(".ActualPrice")
-              .text()
-              .split("Rs ")[1]
-              ?.replace(".00", "")
-              .trim();
+          if (store === "homeshopping.pk") {
+            $("#prodcut-desc", html).each(function () {
+              // const name = $(".col-md-7.col-sm-12.col-xs-12.pad0.mgrmin10")
+              //   .find("h1")
+              //   .find("span")
+              //   .text();
+              const image = $(this).find(".gallery").find("img").attr("src");
+              // const description = name; // 4 ishoping
+              // const store = "homeshopping.pk";
+              // const Availability = $(".in_stock").text()?.trim();
+              const price = $(".ActualPrice")
+                .text()
+                .split("Rs ")[1]
+                ?.replace(".00", "")
+                .trim();
 
-            const category = "Mobiles";
-            const rating = $(".rating-points").text();
-            const ramRom = $(".ga-dataset.active").find("span").text();
+              // const category = "Mobiles";
+              // const rating = $(".rating-points").text();
+              // const ramRom = $(".ga-dataset.active").find("span").text();
 
-            products.push({
-              price,
-              Availability,
-              name,
-              description: name,
-              brand,
-              productUrl,
-              imgUrl,
-              store,
-              category,
-              rating,
+              products.push({
+                price,
+
+                name,
+                description: name,
+                stock: "Available",
+                brand,
+                productUrl,
+                DeliveryCharges,
+                imgUrl: image,
+                store,
+                category,
+              });
+              // console.log("products :>> ", products);
+              // return;
+              postProduct(products);
             });
-            console.log("products :>> ", products);
-            return;
-            postProduct(products);
-          });
+          } else if (store === "shophive.com") {
+            // console.log("object :>> ");
+            $(".column.main", html).each(function () {
+              const price = $(".price-wrapper")
+                .find("span")
+                .text()
+                .split("Rs ")[1]
+                ?.replace(".00", "")
+                .trim();
+              console.log("object :>> ", price);
+              // return;
+
+              // const category = "Mobiles";
+              // const rating = $(".rating-points").text();
+              // const ramRom = $(".ga-dataset.active").find("span").text();
+
+              products.push({
+                price,
+                // Availability,
+                name,
+                description: name,
+                stock: "Available",
+                brand,
+                productUrl,
+                DeliveryCharges,
+                imgUrl,
+                store,
+                category,
+              });
+              console.log("products :>> ", products);
+              // return;
+              postProduct(products);
+            });
+          }
         })
         .catch((err) => console.error(err));
     }
@@ -124,6 +160,7 @@ arrayOfStores.map(
               const imgUrl = $(this).find(imgTag).attr("src");
               const stock = $(this).find(".btn-cart").find("span").text(); //.split("rt")[1];
               stock === "Add to Cart" &&
+                price &&
                 productsLinks.push({
                   name,
                   description: name,
@@ -147,8 +184,10 @@ arrayOfStores.map(
             ];
             console.log("productsLinks in  :>> ", products);
             // console.log("productsLinks in  :>> ", productsLinks);
-            return;
-            await getProductsData(productsLinks);
+            // return;
+            postProduct(products);
+
+            // await getProductsData(productsLinks);
           } else if (storeName === "priceoye.pk") {
             $(".productBox.b-productBox", html).each(function () {
               const productUrl = $(this).find("a").attr("href");
@@ -168,11 +207,11 @@ arrayOfStores.map(
               ribbon === "" &&
                 productsLinks.push({
                   name,
-                  // description: name,
+                  description: name,
                   category,
                   // ribbon,
                   stock: "Available",
-                  url: productUrl,
+                  productUrl,
                   store: storeName,
                   brand:
                     routes.split("/")[1].charAt(0).toUpperCase() +
@@ -190,8 +229,10 @@ arrayOfStores.map(
                 productsLinks?.map((item) => [item[key], item])
               ).values(),
             ];
-            console.log("productsLinks in  :>> ", products);
-            // console.log("productsLinks in  :>> ", productsLinks);
+            // console.log("productsLinks in  :>> ", products);
+            console.log("productsLinks in  :>> ", productsLinks);
+            postProduct(productsLinks);
+
             return;
             await getProductsData(products);
           } else if (storeName === "mobile-phone.pk") {
@@ -240,9 +281,10 @@ arrayOfStores.map(
               const productUrl = $(this).find("a").attr("href");
               const name = $(this).find(".ProductDetails").find("a").text();
 
+              // .find(".col-md-12.col-xs-12.p0")
+              // .find("div")
               const price = $(this)
-                .find(".col-md-12.col-xs-12.p0")
-                .find("a")
+                .find(".price")
                 .find("div")
                 .text()
                 .split("Rs.")[1];
@@ -254,7 +296,48 @@ arrayOfStores.map(
                 description: name,
                 category,
                 // ribbon,
-                stock: "Available",
+                url: productUrl,
+                store: storeName,
+                brand,
+                imgUrl,
+                price,
+                DeliveryCharges,
+                // routes,
+                // detailBoxClasses,
+              });
+            });
+            const key = "name";
+            const products = [
+              ...new Map(
+                productsLinks?.map((item) => [item[key], item])
+              ).values(),
+            ];
+            // console.log("productsLinks in  :>> ", products);
+            // console.log("productsLinks in  :>> ", productsLinks);
+            await getProductsData(productsLinks);
+          } else if (storeName === "shophive.com") {
+            $(".product-item-info", html).each(function () {
+              const productUrl = $(this).find("a").attr("href");
+              const name = $(this).find("h2").find("a").text();
+              const imgUrl = $(this).find("img").attr("src");
+              // console.log("object :>> ", { name, productUrl });
+              // return;
+
+              // .find(".col-md-12.col-xs-12.p0")
+              // .find("div")
+              // .find("div")
+              const price = $(this)
+                .find(".price-wrapper")
+                .find("span")
+                .text()
+                .split("Rs.")[1];
+              // const stock = $(".btn-cart").find("span").text().split("rt")[1];
+              // ribbon === "" &&
+              productsLinks.push({
+                name,
+                description: name,
+                category,
+                // ribbon,
                 url: productUrl,
                 store: storeName,
                 brand,
@@ -274,8 +357,6 @@ arrayOfStores.map(
             // console.log("productsLinks in  :>> ", products);
             // console.log("productsLinks in  :>> ", productsLinks);
             await getProductsData(products);
-            return;
-            postProduct(products);
           }
         })
         .catch((err) => console.error(err));
