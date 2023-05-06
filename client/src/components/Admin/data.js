@@ -73,8 +73,50 @@ module.exports.addBrandFields = [
   {
     label: "Description",
     type: "textarea",
-    id: "Description",
-    name: "Description",
+    id: "description",
+    name: "description",
     className: "w-1/2",
+  },
+];
+module.exports.navigationItems = [
+  {
+    id: 1,
+    title: "Brand Name",
+    icon: "logo-apple",
+  },
+  {
+    id: 2,
+    title: "Dashboard",
+    icon: "home-outline",
+  },
+  {
+    id: 3,
+    title: "Customers",
+    icon: "people-outline",
+  },
+  {
+    id: 4,
+    title: "Messages",
+    icon: "chatbubble-outline",
+  },
+  {
+    id: 5,
+    title: "Help",
+    icon: "help-outline",
+  },
+  {
+    id: 6,
+    title: "Settings",
+    icon: "settings-outline",
+  },
+  {
+    id: 7,
+    title: "Password",
+    icon: "lock-closed-outline",
+  },
+  {
+    id: 8,
+    title: "Sign Out",
+    icon: "log-out-outline",
   },
 ];
