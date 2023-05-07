@@ -4,7 +4,9 @@ const ApiFeatures = require("../utils/apiFeature");
 const ErrorHandler = require("../utils/ErrorHandler");
 // // Create brand
 exports.createBrand = tryCatchAsyncError(async (req, res, next) => {
-  const brand = await Brand.create(req.body?.brand);
+  console.log("brand :>> ", req.body);
+  // return;
+  const brand = await Brand.create(req.body);
   return res.status(201).json({
     success: true,
     message: "Brand created successfully",
@@ -33,38 +35,19 @@ exports.getAllBrands = tryCatchAsyncError(async (req, res, next) => {
     .search()
     .filter()
     .pagination(resultPerPage);
-  if (req.query.name) {
-    const result = await apiFeatures.query;
-    const key = "store";
-    const brands = [
-      ...new Map(result?.map((item) => [item[key], item])).values(),
-    ];
 
-    if (!brands) {
-      return next(new ErrorHandler(`Brand not found`, 404));
-    }
-    res.status(200).json({ success: true, brands, brandsCount, resultPerPage });
-  } else {
-    const result = await apiFeatures.query;
-    const [min, max] = await apiFeatures.range;
-    console.log(min, max, "min , max");
-    const filteredResult = result.filter((doc) => {
-      // Remove commas from the price field and convert to number
-      const priceNum = parseFloat(doc.price.replace(/,/g, ""));
-      // Check if the price is within the range
-      return priceNum >= min && priceNum <= max;
-    });
-    // console.log(filteredResult, "<---");
+  const result = await apiFeatures.query;
 
-    const key = "name";
-    const brands = [
-      ...new Map(filteredResult?.map((item) => [item[key], item])).values(),
-    ];
+  const key = "name";
+  const brands = [
+    ...new Map(filteredResult?.map((item) => [item[key], item])).values(),
+  ];
 
-    if (!brands) {
-      return next(new ErrorHandler(`Brand not found`, 404));
-    }
-    // console.log("else brands :>> ", brands);
-    res.status(200).json({ success: true, brands, brandsCount, resultPerPage });
+  if (!brands) {
+    return next(new ErrorHandler(`Brand not found`, 404));
   }
+  // console.log("else brands :>> ", brands);
+  res
+    .status(200)
+    .json({ success: true, brands: result, brandsCount, resultPerPage });
 });

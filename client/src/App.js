@@ -16,6 +16,8 @@ import Search from "./components/layout/search/Search";
 import LoginSignUp from "./components/User/LoginSignUp";
 import store from "./store";
 import { loadUser } from "./actions/userAction";
+import Dashboard from "./components/Admin/Dashboard";
+import Sidebar from "./components/Admin/Sidebar";
 function App() {
   useEffect(() => {
     store.dispatch(loadUser());
@@ -36,6 +38,8 @@ function App() {
           <Route exact path="/login" element={<LoginSignUp />} />
           <Route exact path="/addBrand" element={<AddBrand />} />
           <Route exact path="/addProduct" element={<AddProduct />} />
+          <Route exact path="/admins" element={<Sidebar />} />
+          <Route exact path="/admin" element={<Dashboard />} />
         </Routes>
         <Features />
         <Footer />

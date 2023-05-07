@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import MetaData from "../MetaData";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "./Search.css";
 
 const Search = () => {
@@ -34,30 +34,27 @@ const Search = () => {
 
 export default Search;
 
-
-
 // import React, { useState, Fragment } from "react";
 // import MetaData from "../MetaData";
 // // import "./Search.css";
 
 // export  const Search = ({history}) => {
- 
+
 // const [keyword, setKeyword] = useState("");
 
 // const searchSubmitHandler = (e) => {
 //   e.preventDefault();
 //   alert(keyword)
 //   if (keyword.trim()) {
-//     history.push(`/products/${keyword}`);
+//     // history.push(`/products/${keyword}`);
 //   } else {
-//     history.push("/products");
+//     // history.push("/products");
 //   }
 // };
 
 //      return (
 //         <>
-//         //  Button trigger modal 
-
+//         //  Button trigger modal
 
 // //  Modal
 // <MetaData title="Search A Product -- ECOMMERCE" />
@@ -65,7 +62,7 @@ export default Search;
 // <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 // <div className="modal-dialog">
 //   <div className="modal-content">
-    
+
 //     <div className="modal-body">
 //     <form className="searchBox" onSubmit={searchSubmitHandler}>
 //     <input
@@ -76,13 +73,10 @@ export default Search;
 //     <input type="submit" value="Search" />
 //   </form>
 //     </div>
-    
+
 //   </div>
 // </div>
 // </div>
 //         </>
 //     )
 // }
-
-
-

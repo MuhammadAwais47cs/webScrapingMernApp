@@ -39,7 +39,7 @@ const ResetPassword = ({ history, match }) => {
     if (success) {
       alert.success("Password Updated Successfully");
 
-      history.push("/login");
+      // history.push("/login");
     }
   }, [dispatch, error, alert, history, success]);
 

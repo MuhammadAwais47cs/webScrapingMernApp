@@ -10,7 +10,7 @@ const Profile = ({ history }) => {
 
   useEffect(() => {
     if (isAuthenticated === false) {
-      history.push("/login");
+      // history.push("/login");
     }
   }, [history, isAuthenticated]);
   return (

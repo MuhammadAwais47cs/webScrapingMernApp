@@ -97,7 +97,7 @@ const LoginSignUp = () => {
     if (error) {
     }
     if (isAuthenticated) {
-      // history.push(redirect);
+      // // history.push(redirect);
       // navigate("/products");
       setCredential(false);
 

@@ -57,7 +57,7 @@ module.exports.addBrandFields = [
     label: "Name",
     type: "text",
     id: "brandName",
-    name: "brandName",
+    name: "name",
     className: "w-1/3",
   },
   {

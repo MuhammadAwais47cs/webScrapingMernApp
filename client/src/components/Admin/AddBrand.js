@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, createProduct } from "../../actions/productAction.js";
+import { clearErrors, createBrand } from "../../actions/brandAction";
 import { useAlert } from "react-alert";
 import { FaSpellCheck, FaPowerOff, FaUserCircle } from "react-icons/fa";
 // import { Button } from "@material-ui/core";
@@ -14,6 +14,8 @@ import MetaData from "../layout/MetaData";
 // import SideBar from "./Sidebar";
 import { NEW_PRODUCT_RESET } from "../../constant/productConstant";
 import { addBrandCheckBox, addBrandFields, checkBox } from "./data";
+import { baseurl } from "../../baseurl";
+import axios from "axios";
 
 const NewProduct = ({ history }) => {
   const dispatch = useDispatch();
@@ -21,11 +23,16 @@ const NewProduct = ({ history }) => {
 
   const { loading, error, success } = useSelector((state) => state.newProduct);
 
-  const [name, setName] = useState("");
+  const [brand, setBrand] = useState({
+    name: "",
+    sName: "",
+    link: "",
+    description: "",
+    relatedBrand: "",
+    language: "",
+  });
   const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [Stock, setStock] = useState(0);
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
@@ -38,6 +45,7 @@ const NewProduct = ({ history }) => {
     "Camera",
     "SmartPhones",
   ];
+  const languages = ["English", "Urdu"];
 
   useEffect(() => {
     if (error) {
@@ -47,26 +55,53 @@ const NewProduct = ({ history }) => {
 
     if (success) {
       alert.success("Product Created Successfully");
-      history.push("/admin/dashboard");
+      // history.push("/admin/dashboard");
       //   dispatch({ type: NEW_PRODUCT_RESET });
     }
   }, [dispatch, alert, error, history, success]);
 
-  const createProductSubmitHandler = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setBrand((previces) => ({
+      ...previces,
+      [name]: value,
+    }));
+  };
+  const handleSubmit = (e) => {
     e.preventDefault();
-
+    const { name, sName, link, relatedBrand, language, description } = brand;
+    console.log("brand :>> ", name, images);
     const myForm = new FormData();
-
     myForm.set("name", name);
-    myForm.set("price", price);
+    myForm.set("sName", sName);
+    myForm.set("link", link);
+    myForm.set("relatedBrand", relatedBrand);
+    myForm.set("language", language);
     myForm.set("description", description);
-    myForm.set("category", category);
-    myForm.set("Stock", Stock);
+    const data = {
+      name,
+      sName,
+      link,
+      relatedBrand,
+      language,
+      description,
+      // images,
+    };
+    // images.forEach((image) => {
+    //   console.log("image :>> ", image);
+    //   myForm.append("images", image);
+    // });
+    // console.log(data, myForm, "data");
+    // return;
+    const config = {
+      headers: { "Content-Type": "application/json" },
+    };
 
-    images.forEach((image) => {
-      myForm.append("images", image);
-    });
-    // dispatch(createProduct(myForm));
+    const { res } = axios.post(`${baseurl}/api/v1/brand/new`, data, config);
+
+    // console.log("myForm :>> ", data);
+    // dispatch(createBrand(data));
   };
 
   const createProductImagesChange = (e) => {
@@ -88,6 +123,7 @@ const NewProduct = ({ history }) => {
       reader.readAsDataURL(file);
     });
   };
+  const { name, sName, link, relatedBrand, language, description } = brand;
 
   return (
     <Fragment>
@@ -97,7 +133,7 @@ const NewProduct = ({ history }) => {
           <form
             className="createProductForm"
             encType="multipart/form-data"
-            onSubmit={createProductSubmitHandler}
+            onSubmit={handleSubmit}
           >
             <h1>Add Brand</h1>
             {addBrandFields.map(({ label, type, id, name, className }) => (
@@ -108,14 +144,14 @@ const NewProduct = ({ history }) => {
                   id={id}
                   name={name}
                   required
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={handleChange}
                 />
               </div>
             ))}
 
             <div>
-              <select onChange={(e) => setCategory(e.target.value)}>
-                <option value=""> Related Brand</option>
+              <select onChange={handleChange} name="relatedBrand">
+                <option value={relatedBrand}> Related Brand</option>
                 {categories.map((cate) => (
                   <option key={cate} value={cate}>
                     {cate}
@@ -124,9 +160,9 @@ const NewProduct = ({ history }) => {
               </select>
             </div>
             <div>
-              <select onChange={(e) => setCategory(e.target.value)}>
-                <option value=""> languages</option>
-                {categories.map((cate) => (
+              <select onChange={handleChange} name="language">
+                <option value={language}> languages</option>
+                {languages.map((cate) => (
                   <option key={cate} value={cate}>
                     {cate}
                   </option>

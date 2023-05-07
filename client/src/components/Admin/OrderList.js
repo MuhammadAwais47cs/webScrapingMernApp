@@ -42,7 +42,7 @@ const OrderList = ({ history }) => {
 
     if (isDeleted) {
       alert.success("Order Deleted Successfully");
-      history.push("/admin/orders");
+      // history.push("/admin/orders");
       dispatch({ type: DELETE_ORDER_RESET });
     }
 

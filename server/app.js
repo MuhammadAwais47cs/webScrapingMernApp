@@ -13,8 +13,10 @@ app.use(errorMiddleware);
 
 // Routes Imports
 
+const brands = require("./routes/brandRoutes");
 const products = require("./routes/productsRoutes");
 const user = require("./routes/userRoute");
 app.use("/api/v1", products);
+app.use("/api/v1", brands);
 app.use("/api/v1", user);
 module.exports = app;
